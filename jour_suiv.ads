@@ -1,7 +1,12 @@
-with Ada.Text_Io,Ada.Integer_Text_Io,Ada.Float_Text_Io;
-use Ada.Text_Io,Ada.Integer_Text_Io,Ada.Float_Text_Io;
+with declaration_adherent,dates,fichiers;
 
-package jour_suiv is 
+package Jour_Suiv is
    
-      
-end jour_suiv;
+   type T_Semaine is(Lundi,Mardi,Mercredi,Jeudi,Vendredi,Samedi,Dimanche);
+   Jour_act:T_Semaine:=Mercredi;
+
+procedure Passer_Jour_Suivant(D:in out dates.T_Date;J:in out T_Semaine);
+
+
+
+end jour_Suiv;
