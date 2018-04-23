@@ -1,5 +1,5 @@
-with Ada.Text_Io,Ada.Integer_Text_Io,dates,gestion_pile,declaration_adherent,menu_principal,abr_adher;
-use Ada.Text_Io,Ada.Integer_Text_Io,dates,gestion_pile,declaration_adherent,menu_principal,abr_adher;
+with Ada.Text_Io,Ada.Integer_Text_Io,dates,gestion_pile,declaration_adherent,menu_principal,abr_adher,action_adherent;
+use Ada.Text_Io,Ada.Integer_Text_Io,dates,gestion_pile,declaration_adherent,menu_principal,abr_adher,action_adherent;
 
 
 procedure Main is 
@@ -51,9 +51,10 @@ begin
         	menu_principal.affichage_partie_reservation(choix1);
           case choix1 is
           	when '1'=>
-           		Put_Line("*** Reservation des creneaux ***");
+                     Put_Line("*** Reservation des creneaux ***");
+                     Reservation_Creneau(PteurPileA,plan_act);
 							New_Line;
-							-- procedure réservation des créneaux
+							
 							exit;
 						when '2'=>
 							Put_Line("*** Annulation des creneaux ***");

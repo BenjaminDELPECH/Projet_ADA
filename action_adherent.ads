@@ -3,6 +3,7 @@ use Ada.Text_Io,Ada.Integer_Text_Io,Ada.Float_Text_Io,declaration_adherent,gesti
 
 package action_Adherent is
    type T_Semaine is(Lundi,Mardi,Mercredi,Jeudi,Vendredi,Samedi,Dimanche);
+    
    
 
 Tete:gestion_pile.T_Pteurpileadherents;

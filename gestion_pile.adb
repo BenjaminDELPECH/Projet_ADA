@@ -56,7 +56,8 @@ PROCEDURE Saisie_activite (acti : out declaration_adherent.T_Contrat) is
 Procedure deja_inscrit (infos : declaration_adherent.T_Adherent ; Pteur : T_PteurPileAdherents ; inscrit : out boolean ; meme_contrat : out boolean) is
 begin
 	if Pteur = null then inscrit := false ; meme_contrat := false;
-	else if Pteur.adherent.nom=infos.nom and then Pteur.adherent.prenom=infos.prenom and then Pteur.adherent.datenaissance.jour=infos.datenaissance.jour and then Pteur.adherent.datenaissance.mois=infos.datenaissance.mois and then Pteur.adherent.datenaissance.annee=infos.datenaissance.annee then
+   else if Pteur.Adherent.Nom=Infos.Nom and then Pteur.Adherent.Prenom=Infos.Prenom and then Pteur.Adherent.Datenaissance.Jour=Infos.Datenaissance.Jour and then Pteur.Adherent.Datenaissance.Mois=Infos.Datenaissance.Mois 
+      and then Pteur.adherent.datenaissance.annee=infos.datenaissance.annee then
 			inscrit := true;
 			if declaration_adherent.T_Contrat'image(Pteur.adherent.Typecontrat)=declaration_adherent.T_Contrat'image(infos.Typecontrat) then
 			meme_contrat:=true;
