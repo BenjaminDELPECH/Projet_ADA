@@ -4,26 +4,27 @@ use Ada.Text_Io, Ada.Integer_Text_Io;
 package body Save is
 
    procedure Enregistrer_Adh (
-         P               : in out T_Pteurpileadherents;
-         Nv_Nom          :        Mot;
-         Nv_Prenom       :        Mot;
-         Datenaiss       :        T_Date;
-         Datederadhesion :        T_Date;
+         P               : in out gestion_pile.T_PteurPileAdherents;
+         Nv_Nom          :        declaration_adherent.Mot;
+         Nv_Prenom       :        declaration_adherent.Mot;
+         Datenaiss       :        dates.T_Date;
+         Datederadhesion :        dates.T_Date;
          Nbseances       :        integer;
-         Type_Contract   :        T_Activite) is
+         Type_Contract   :        declaration_adherent.T_Contrat) is
       --les planing seront vides pour les nouveaux
-      Parc : T_Pteurpileadherents := P;
-      Save : T_Pteurpileadherents;
+      Parc : gestion_pile.T_Pteurpileadherents := P;
+      Save : gestion_pile.T_Pteurpileadherents;
 
    begin
       while Parc/=null loop
-         if P.Adherent.Nom = Nv_Nom and then P.Adherent.Prenom = Nv_Prenom and then P.Adherent.Datenaissance = Datenaiss then
+         if P.Adherent.Nom = Nv_Nom and then P.Adherent.Prenom = Nv_Prenom 
+         and then P.Adherent.Datenaissance = Datenaiss then
             Put ("Cet adherent existe deja dans notre club."); New_Line;
             exit;
          end if;
          Parc := Parc.Suiv;
       end loop;
-      if Parc =null then
+      if Parc=null then
          Save.Adherent.Nom := Nv_Nom;
          Save.Adherent.Prenom := Nv_Prenom;
          Save.Adherent.DateNaissance:=Datenaiss;
@@ -32,7 +33,7 @@ package body Save is
          Save.Adherent.TypeContrat := Type_Contract;
 --         Save.Adherent.Sem1 := 
 --         Save.Adherent.Sem2 :=   
-         P := new T_Celluleadherents'(Save.adherent , P);
+         P := new gestion_pile.T_Celluleadherents'(Save.adherent , P);
       end if;
          
       end Enregistrer_Adh;
