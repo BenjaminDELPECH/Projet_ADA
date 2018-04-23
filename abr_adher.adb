@@ -35,14 +35,16 @@ end Meme_nom_prenom;
    begin
       if Arbre_de_vie=null then
          Arbre_de_vie:= new T_Noeud'(PteurAdherant, null, null);
-      elsif not Nom_Prenom_Sup(PteurAdherant,Arbre_de_vie) then
+      elsif not Nom_Prenom_Sup(PteurAdherant,Arbre_de_vie) then --valeur nom +
+      -- prenom inférieur à la valeur du noeud
          Insert_Abr(PteurAdherant, Arbre_de_vie.Fg);
       else
          Insert_Abr(PteurAdherant, Arbre_de_vie.Fd);
       end if;
    end Insert_Abr;
 
-Procedure initialisation_ABR (Pteur:gestion_pile.T_PteurPileAdherents ; A : out T_Arbre_adh) is
+Procedure initialisation_ABR (Pteur:gestion_pile.T_PteurPileAdherents ; 
+   A : out T_Arbre_adh) is
    begin
    if pteur /= null then 
       insert_ABR(Pteur,A);
