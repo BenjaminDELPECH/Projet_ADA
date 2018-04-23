@@ -9,7 +9,7 @@ package body Save is
          Nv_Prenom       :        Mot;
          Datenaiss       :        T_Date;
          Datederadhesion :        T_Date;
-         Nbseances       :        Positive;
+         Nbseances       :        integer;
          Type_Contract   :        T_Activite) is
       --les planing seront vides pour les nouveaux
       Parc : T_Pteurpileadherents := P;
