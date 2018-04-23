@@ -5,13 +5,11 @@ N : constant integer := 3;
 P : constant integer := 4;
 
 subtype mot is string(1..20);
-   type T_Contrat is (Aqua, Fitness, Aquaetfitness);
-   type T_Activite is (Aqua, Fitness);
+
+type T_Contrat is (Aqua, Fitness, Aquaetfitness);
+type T_Activite is (Aqua, Fitness);
    
  
-
-   --Creneaux pour les adherents 
-   
   Type T_Creneau_Adh is record 
     Activite:T_Activite; --Aqua, Fitness, AquaEtFitness;
     Present:Boolean;
@@ -22,7 +20,7 @@ Type T_Planning_Adh is array(Integer range 1..6)of T_Jour_adh;
    
 
 
---Adherent
+
 Type T_Adherent is record
 	Nom : mot := (others=>' ');
 	Prenom : mot := (others=>' ');
@@ -44,8 +42,8 @@ end record;
     Type T_Creneau_Aqua_gen is record
       Tabinscrit:T_Tabadherents(1..N);
       Taille:Integer:=0;
-       Open:Boolean;
-     end record;
+      Open:Boolean;
+   end record;
 
 
    Type T_Creneau_Fitness_gen is record
@@ -57,22 +55,15 @@ end record;
    
    Type T_Creneau_gen is record
       Aqua:T_Creneau_Aqua_gen;
-      Fitness:T_Creneau_Fitness_Gen;
-      archive:boolean:=False;
+      Fitness:T_Creneau_Fitness_gen;
    end record;
    
    type T_Jour_Gen is array(Integer range 1..6)of T_Creneau_Gen;
    type T_Planning_General is array(Integer range 1..6)of T_Jour_gen;
 
+--Creneau pour les planning persos.
 
 
-
-   --Planning Semaine1, Semaine 2 et actuel
-   
-   Plan_Act: T_Planning_General;
-   Plan_Suiv: T_Planning_General;
-   Plan_Vide: T_Planning_General;
-   
    
 
 

@@ -1,7 +1,25 @@
-with ada.text_io;
-use ada.text_io;
+with ada.text_io,ada.integer_text_io;
+use ada.text_io,ada.integer_text_io;
 
 Package body gestion_pile is
+
+-- Procedure saisie_mot (f : out string) is
+-- 	st : string;
+-- 	k : integer;
+-- begin
+-- 	loop
+-- 		begin
+-- 		get_line(st,k);
+-- 		f:=st(1..k);
+-- 		exit;
+-- 		exception
+-- 			when constraint_error=>skip_line; put("Erreur, recommencer");
+-- 			new_line;
+-- 			when data_error=>skip_line; put("Erreur, recommencer");
+-- 			new_line;
+-- 		end;
+-- 	end loop;
+-- end saisie_mot;
 
 Procedure saisie_mot (s : out declaration_adherent.mot) is
 	k : integer;
@@ -13,7 +31,8 @@ begin
 		exception
 			when constraint_error=>skip_line; put("Erreur, recommencer");
 			new_line;
-			when data_error=>skip_line; put("Erreur, recommencer");new_line;
+			when data_error=>skip_line; put("Erreur, recommencer");
+			new_line;
 		end;
 	end loop;
 end saisie_mot;
@@ -37,7 +56,7 @@ PROCEDURE Saisie_activite (acti : out declaration_adherent.T_Contrat) is
 Procedure deja_inscrit (infos : declaration_adherent.T_Adherent ; Pteur : T_PteurPileAdherents ; inscrit : out boolean ; meme_contrat : out boolean) is
 begin
 	if Pteur = null then inscrit := false ; meme_contrat := false;
-	else if Pteur.adherent.nom=infos.nom and then Pteur.adherent.prenom=infos.prenom then
+	else if Pteur.adherent.nom=infos.nom and then Pteur.adherent.prenom=infos.prenom and then Pteur.adherent.datenaissance.jour=infos.datenaissance.jour and then Pteur.adherent.datenaissance.mois=infos.datenaissance.mois and then Pteur.adherent.datenaissance.annee=infos.datenaissance.annee then
 			inscrit := true;
 			if declaration_adherent.T_Contrat'image(Pteur.adherent.Typecontrat)=declaration_adherent.T_Contrat'image(infos.Typecontrat) then
 			meme_contrat:=true;
@@ -87,8 +106,8 @@ begin
 	end loop;
 
 	new_line;
-	Saisie_activite(act);
 	put("Saisir votre activité, 'Fitness', 'Aqua', 'AquaEtFitness' : ");
+	Saisie_activite(act);
 
 	InfoAdherent.TypeContrat:=Act;
 	InfoAdherent.DateDerniereAdhesion:=dates.date_jour;
@@ -98,6 +117,9 @@ begin
 		new_line;
 		put ("Enregistrement effectué");
 		new_line;
+		put ("Appuyez sur entrer pour retourner au menu principal");
+		new_line;
+		skip_line;
 	else 
 		new_line;
 		put("Personne déjà inscrite");
@@ -113,10 +135,16 @@ begin
 					put("Modification du contrat ");
 					modification_contrat(InfoAdherent,Pteur);
 					new_line;
+					put ("Appuyez sur entrer pour retourner au menu principal");
+					new_line;
+					skip_line;
 					exit;
 				when 'n'|'N'=>
 					put("Contrat non modifié");
 					new_line;
+					put ("Appuyez sur entrer pour retourner au menu principal");
+					new_line;
+					skip_line;
 					exit;
 				when others => put ("Erreur dans la saisie, recommencer");
 					new_line;
@@ -125,5 +153,46 @@ begin
 		end if;
 	end if;
 end ajout_adherent;
+
+Procedure Affichage_info_adh_pile (Pteur : T_PteurPileAdherents ; nomAdh, prenomAdh : declaration_adherent.mot; trouve : out boolean) is
+begin
+	if Pteur/=null then
+		if nomAdh=Pteur.adherent.nom and then prenomAdh=Pteur.adherent.prenom then
+			new_line;
+			put ("Adherent au club depuis : ");
+			put (Pteur.adherent.DateDerniereAdhesion.jour,width=>0);
+			put("/");
+			put (Pteur.adherent.DateDerniereAdhesion.mois, width=>0);
+			put("/");
+			put (Pteur.adherent.DateDerniereAdhesion.annee, width=>0);
+			new_line;
+			new_line;
+			put ("Date de naissance : ");
+			put (Pteur.adherent.datenaissance.jour,width=>0);
+			put("/");
+			put (Pteur.adherent.datenaissance.mois, width=>0);
+			put("/");
+			put (Pteur.adherent.datenaissance.annee, width=>0);
+			new_line; new_line;
+			trouve:=true;
+		else Affichage_info_adh_pile(Pteur.suiv,nomAdh, prenomAdh,trouve);
+		end if;
+	else trouve:=false;
+	end if;
+end Affichage_info_adh_pile;
+
+Procedure saisie_nom_prenom (nomAdh,prenomAdh:declaration_adherent.mot) is
+begin
+	new_line;
+	Put("Saisie nom de la personne : ");
+	Saisie_mot(nomAdh);
+	new_line;
+	put("Saisie prenom de la personne : ");
+	Saisie_mot(prenomAdh);
+end saisie_nom_prenom;
+
+
+
+
 
 end gestion_pile;
