@@ -16,7 +16,6 @@ end saisie_choix;
 procedure Affichage_Menu_principal (char : out character) is
 
 begin
---   Remplissage_adherent(Tab??);
       New_Line(2);
       Put_Line("************************");
       new_line;
@@ -73,7 +72,7 @@ begin
    Put_Line("   1 : Reserver un creneau pour un adherent");
    Put_Line("   2 : Annuler un creneau d'un adherent");
    Put_Line("   3 : Afficher les adherents d'un creneau donne");
-   Put_Line("   4 : Mettre a jour la date");-----------------------------------sans renouvellement ???????????????????
+   Put_Line("   4 : Mettre a jour la date");
    Put_Line("   5 : QUITTER");
    New_Line;
    char:=saisie_choix;

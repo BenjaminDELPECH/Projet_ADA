@@ -15,5 +15,6 @@ package abr_adher is
       A : IN OUT T_Arbre_adh);
 
    Procedure affich_Prefixe_ABR (A : IN T_Arbre_adh);
+   Procedure Affichage_ABR ( A : T_Arbre_adh);
       
 end abr_adher;

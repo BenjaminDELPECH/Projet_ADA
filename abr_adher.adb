@@ -31,7 +31,7 @@ package body abr_adher is
 end Meme_nom_prenom;
 
 
-   Procedure insert_ABR (Pteur : IN gestion_pile.T_PteurPileAdherents ; 
+   Procedure insert_ABR (Pteur : gestion_pile.T_PteurPileAdherents ; 
       A : IN OUT T_Arbre_adh) is
    begin
       if A=null then
@@ -54,5 +54,16 @@ end Meme_nom_prenom;
             affich_Prefixe_ABR (A.Fd);
          end if;
    end affich_Prefixe_ABR;
+
+   Procedure Affichage_ABR ( A : T_Arbre_adh) is
+   begin
+      if A/=null then
+         put(A.PteurCelluleAdh.Adherent.Nom);
+         put(A.PteurCelluleAdh.Adherent.prenom);
+         new_line;
+         Affichage_ABR(A.Fg);
+         Affichage_ABR(A.Fd);
+      end if;
+   end Affichage_ABR;
 
 end ABR_adher;
