@@ -5,8 +5,6 @@ USE Ada.Text_IO, Ada.Integer_Text_IO, Ada.Characters,
    
 package body Donnee is
 
-   
-
    procedure Sauvegarde ( Tab: IN OUT T_Tabadherents ) is
    Begin
       Declare
