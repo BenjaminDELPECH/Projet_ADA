@@ -43,10 +43,8 @@ begin
    New_Line;
    Put_Line("   1 : Ajouter un adherent");
    Put_Line("   2 : Chercher un adherent");
-   Put_Line("   3 : Afficher les fiches de tous les adherents");
-   Put_Line("   4 : Affichage des adherents en mode prefixe");  
-   Put_Line("   5 : Supprimer un adherent");
-   Put_Line("   6 : QUITTER");
+   Put_Line("   3 : Affichage les adherents en mode prefixe");  
+   Put_Line("   4 : QUITTER");
    New_Line;
    char:=saisie_choix;
    New_Line;
