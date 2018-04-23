@@ -160,19 +160,11 @@ begin
 		if nomAdh=Pteur.adherent.nom and then prenomAdh=Pteur.adherent.prenom then
 			new_line;
 			put ("Adherent au club depuis : ");
-			put (Pteur.adherent.DateDerniereAdhesion.jour,width=>0);
-			put("/");
-			put (Pteur.adherent.DateDerniereAdhesion.mois, width=>0);
-			put("/");
-			put (Pteur.adherent.DateDerniereAdhesion.annee, width=>0);
+			dates.affichage_date(Pteur.adherent.DateDerniereAdhesion);
 			new_line;
 			new_line;
 			put ("Date de naissance : ");
-			put (Pteur.adherent.datenaissance.jour,width=>0);
-			put("/");
-			put (Pteur.adherent.datenaissance.mois, width=>0);
-			put("/");
-			put (Pteur.adherent.datenaissance.annee, width=>0);
+			dates.affichage_date(Pteur.adherent.DateNaissance);
 			new_line; new_line;
 			trouve:=true;
 		else Affichage_info_adh_pile(Pteur.suiv,nomAdh, prenomAdh,trouve);
