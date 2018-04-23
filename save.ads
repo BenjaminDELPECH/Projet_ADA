@@ -1,4 +1,5 @@
-with declaration_adherent,gestion_pile,dates;
+with declaration_adherent,gestion_pile,dates,dates;
+use declaration_adherent,gestion_pile,dates;
 
 package Save is
 

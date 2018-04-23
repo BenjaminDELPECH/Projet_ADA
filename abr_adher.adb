@@ -30,18 +30,25 @@ package body abr_adher is
    end if;
 end Meme_nom_prenom;
 
-
-   Procedure insert_ABR (Pteur : gestion_pile.T_PteurPileAdherents ; 
+   Procedure insert_ABR (PteurAdherant : gestion_pile.T_PteurPileAdherents ; 
       A : IN OUT T_Arbre_adh) is
    begin
       if A=null then
-         A:= new T_Noeud'(Pteur, null, null);
-      elsif not Nom_Prenom_Sup(Pteur,A) then
-         Insert_Abr(Pteur, A.Fg);
+         A:= new T_Noeud'(PteurAdherant, null, null);
+      elsif not Nom_Prenom_Sup(PteurAdherant,A) then
+         Insert_Abr(PteurAdherant, A.Fg);
       else
-         Insert_Abr(Pteur, A.Fd);
+         Insert_Abr(PteurAdherant, A.Fd);
       end if;
    end Insert_Abr;
+
+Procedure initialisation_ABR (Pteur:in out gestion_pile.T_PteurPileAdherents ; A : out T_Arbre_adh) is
+begin
+   if pteur /= null then 
+      insert_ABR(Pteur,A);
+      pteur:=pteur.suiv;
+   end if;
+end initialisation_ABR;
 
    Procedure affich_Prefixe_ABR (A : T_Arbre_adh) is
       begin
