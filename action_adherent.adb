@@ -8,63 +8,95 @@ package body Action_Adherent is
          Choixsem  : in     Integer;
          Cj        : in     Integer;
          Ch        : in     Integer;
-         Ca        : in     Integer;
+         Choix_act      : in     Integer;
          Choix_Adh : in     Integer;
          Pt        :        Gestion_Pile.T_Pteurpileadherents) is
-      Tmp2       : Gestion_Pile.T_Pteurpileadherents := Pt;
+      
+      tmp2       : Gestion_Pile.T_Pteurpileadherents := Pt;
       Verif      : Boolean                           := False;
       Adh        : T_Adherent;
       Act_Choose : T_Activite;
 
    begin
-      for I in 1..Choix_Adh loop
-         Tmp2:= Tmp2.Suiv;
+      for I in 1..Choix_Adh-1 loop
+         tmp2:= tmp2.Suiv;
       end loop;
 
 
 
-      Adh:=Tmp2.Adherent;
+      
       --Verification
-      if Ca = 1 then
+      if Choix_act = 1 then
          Act_Choose := Aqua;
          if P(Cj)(Ch).Aqua.Tabinscrit(N).Datenaissance.Annee = 1 then
             Verif := True;
          end if;
          for I in P(Cj)(Ch).Aqua.Tabinscrit'range loop
-            if P(Cj)(Ch).Aqua.Tabinscrit(N).Nom = Adh.Nom
-                  and P(Cj)(Ch).Aqua.Tabinscrit(N).Prenom = Adh.Prenom
-                  and  P(Cj)(Ch).Aqua.Tabinscrit(N).Datenaissance.Annee = Adh.Datenaissance.Annee
-                  and  P(Cj)(Ch).Aqua.Tabinscrit(N).Datenaissance.Mois = Adh.Datenaissance.Mois
+            if P(Cj)(Ch).Aqua.Tabinscrit(N).Nom = tmp2.Adherent.Nom
+                  and P(Cj)(Ch).Aqua.Tabinscrit(N).Prenom = tmp2.Adherent.Prenom
+                  and  P(Cj)(Ch).Aqua.Tabinscrit(N).Datenaissance.Annee = tmp2.Adherent.Datenaissance.Annee
+                  and  P(Cj)(Ch).Aqua.Tabinscrit(N).Datenaissance.Mois = tmp2.Adherent.Datenaissance.Mois
                   then
                Verif := False;--car personne deja dans le creneau
             end if;
          end loop;
+      
+         --Modif planning general
+           If Verif = True Then 
+           For I in P(Cj)(Ch).Aqua.Tabinscrit'range loop
+               if P(Cj)(Ch).Aqua.Tabinscrit(I).Nom = " " then
+                  P(Cj)(Ch).Aqua.Tabinscrit(I) := tmp2.Adherent;
+                  P(Cj)(Ch).Aqua.Taille :=P(Cj)(Ch).Aqua.Taille+1;
+               end if;
+            end loop;
+      end if;
+      end if;
+      
+
+if Choix_act = 2 then
+         Act_Choose := Fitness;
+         if P(Cj)(Ch).Fitness.Tabinscrit(N).Datenaissance.Annee = 1 then
+            Verif := True;
+         end if;
+         for I in P(Cj)(Ch).Fitness.Tabinscrit'range loop
+            if P(Cj)(Ch).Fitness.Tabinscrit(N).Nom = tmp2.Adherent.Nom
+                  and P(Cj)(Ch).Fitness.Tabinscrit(N).Prenom = tmp2.Adherent.Prenom
+                  and  P(Cj)(Ch).Fitness.Tabinscrit(N).Datenaissance.Annee = tmp2.Adherent.Datenaissance.Annee
+                  and  P(Cj)(Ch).Fitness.Tabinscrit(N).Datenaissance.Mois = tmp2.Adherent.Datenaissance.Mois
+                  then
+               Verif := False;--car personne deja dans le creneau
+            end if;
+         end loop;
+      
+         --Modif planning general
+           If Verif =True Then 
+           For I in P(Cj)(Ch).Fitness.Tabinscrit'range loop
+               if P(Cj)(Ch).Fitness.Tabinscrit(I).Nom = " " then
+                  P(Cj)(Ch).Fitness.Tabinscrit(I) := tmp2.Adherent;
+                  P(Cj)(Ch).Fitness.Taille :=P(Cj)(Ch).Aqua.Taille+1;
+               end if;
+            end loop;
+            end if;
+      
       end if;
 
 
-      --Creneau pas rempli et adherent pas déjà dans le creneau dont on l'insere
+
+      
       if Verif = True then
 
          --modif planning adherent semaine 1
          if Choixsem = 1 then
             Tmp2.Adherent.Planingsemaine1(Cj)(Ch).Activite := Act_Choose ;
+            Tmp2.Adherent.Nbseances:=Tmp2.Adherent.Nbseances+1;
+            new_line;Put_line("CRENEAU BIEN RESERVE !");
           else 
-            Tmp2.Adherent.Planingsemaine2(Cj)(Ch).Activite := Act_Choose ;
+            Tmp2.Adherent.Planingsemaine2(Cj)(Ch).Activite := Act_Choose;
+            Tmp2.Adherent.Nbseances:=Tmp2.Adherent.Nbseances+1;
+            new_line;Put_line("CRENEAU BIEN RESERVE ! ");
           end if;
 
-
-
-            --Modif planning general
-            for I in P(Cj)(Ch).Aqua.Tabinscrit'range loop
-               if P(Cj)(Ch).Aqua.Tabinscrit(I).Nom = " " then
-                  P(Cj)(Ch).Aqua.Tabinscrit(I) := Adh;
-                  P(Cj)(Ch).Aqua.Taille :=P(Cj)(Ch).Aqua.Taille+1;
-               end if;
-            end loop;
-
-
-
-end if;
+     end if;
 
 
 
@@ -152,8 +184,8 @@ end Edit_Planning;
          Get(Choixadh);
          Skip_Line;
       else
-         Put("pas d'adherents");
-         Etape_Suiv:=True;
+         NEW_line;new_line;Put("pas d'adherents");
+         Etape_Suiv:=False;
       end if;
 
       --recuperation adherent
@@ -166,10 +198,10 @@ end Edit_Planning;
 
          --Choix d'une semaine
          loop
-            Put("1=> Semaine actuelle");
-            Put("2=> Semaine suivante");
-            Put("3=> Quitter");
-            Get(Choix_Sem);
+            NEW_line;new_line;Put("1=> Semaine actuelle");NEW_line;
+            Put("2=> Semaine suivante");new_line;
+            Put("3=> Quitter");NEW_line;new_line;
+            Get(Choix_Sem);            
             case Choix_Sem is
                when 1=>
                   P:=Plan_Act;
@@ -266,7 +298,9 @@ end Edit_Planning;
 
                         Put(Choixact);
                         case Choixact is
-                           when 1=> --changement planning gen
+                           when 1=>
+                              Edit_Planning(
+                                 P,Choix_Sem,Choixjour,Choixhoraire,Choixact,ChoixAdh,tete);
 
                               null;
 
