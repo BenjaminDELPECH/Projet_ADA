@@ -1,5 +1,5 @@
 With ada.text_io, ada.integer_text_io;
-Use ada.text_io, ada.integer_text_io;
+ Use ada.text_io, ada.integer_text_io;
 
 package body dates is 
 	
