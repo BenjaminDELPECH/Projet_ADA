@@ -181,7 +181,7 @@ begin
 	end if;
 end Affichage_info_adh_pile;
 
-Procedure saisie_nom_prenom (nomAdh,prenomAdh:declaration_adherent.mot) is
+Procedure saisie_nom_prenom (nomAdh,prenomAdh: out declaration_adherent.mot) is
 begin
 	new_line;
 	Put("Saisie nom de la personne : ");

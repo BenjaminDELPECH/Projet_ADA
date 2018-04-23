@@ -1,5 +1,5 @@
-with Ada.Text_Io,Ada.Integer_Text_Io,dates,gestion_pile,declaration_adherent,menu_principal;
-use Ada.Text_Io,Ada.Integer_Text_Io,dates,gestion_pile,declaration_adherent,menu_principal;
+with Ada.Text_Io,Ada.Integer_Text_Io,dates,gestion_pile,declaration_adherent,menu_principal,abr_adher;
+use Ada.Text_Io,Ada.Integer_Text_Io,dates,gestion_pile,declaration_adherent,menu_principal,abr_adher;
 
 
 procedure Main is 
@@ -7,6 +7,9 @@ procedure Main is
 	PteurPileA : T_PteurPileAdherents;
 	choix,choix1: character;
 	sortie : boolean := false;
+	Arbre : abr_adher.T_Arbre_Adh;
+	nomadherent,prenomadherent : declaration_adherent.mot;
+	trouve : boolean;
 
 begin
 	Put_Line("======");
@@ -28,23 +31,15 @@ begin
 							exit;
 						when '2'=>
 							Put_Line("*** Chercher un adherent***");
-							-- procedure recherche adherent
-						when '3' =>
-         			Put_Line("*** Afficher les fiches de tous des adherents ***");
-         			New_Line;
-       			 -- procédure affichage
-         			exit;
-         		when '4' =>
+							gestion_pile.saisie_nom_prenom(nomadherent,prenomadherent);
+							gestion_pile.Affichage_info_adh_pile (PteurPileA,nomadherent,prenomadherent,trouve);
+							-- procedure arherent_archive
+         		when '3' =>
          			Put_Line("*** Affichage des adherents en mode prefixe ***");
-      				--affich_Prefixe_ABR (A);
+      				abr_adher.affich_Prefixe_ABR(Arbre);
               New_Line;
              	exit;                
-            when '5' =>
-            	Put_Line("*** Supprimer un adherent ***");
-              New_Line;
-              -- procédure suppression
-              exit;
-            when '6'=>
+            when '4'=>
             	exit;
             when others =>
             	Put_Line("Choix inconnu, recommencer");
