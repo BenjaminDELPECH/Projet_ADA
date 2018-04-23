@@ -18,8 +18,15 @@ procedure Affichage_Menu_principal (char : out character) is
 begin
 --   Remplissage_adherent(Tab??);
       New_Line(2);
-      Put_Line("Menu principal");
+      Put_Line("************************");
+      new_line;
+      Put_Line("     MENU PRINCIPAL");
+      new_line;
+      Put_Line("************************");
+      new_line;
       New_Line;
+      put_line(" Que souhaitez vous faire ?");
+      new_line;
       Put_Line("   1 : Gerer les adherents");
       Put_Line("   2 : Gerer les reservations");
       Put_Line("   3 : Sauvegarde");

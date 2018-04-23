@@ -9,7 +9,7 @@ subtype intervale_mois is integer range 1..12;
 		annee : positive;
 	end record;
 
-	date_jour:T_Date:=(25,04,2017); -- date soutenance
+	date_jour:T_Date:=(25,04,2018); -- date soutenance
 
     Function verification_date_bisextile (d : T_Date) return boolean;
     Procedure saisie_date (d : out T_Date; fait : out boolean);

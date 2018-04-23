@@ -1,5 +1,5 @@
-with Ada.Text_Io,Ada.Integer_Text_Io,dates,gestion_pile,declaration_adherent,menu_principal,abr_adher,action_adherent;
-use Ada.Text_Io,Ada.Integer_Text_Io,dates,gestion_pile,declaration_adherent,menu_principal,abr_adher,action_adherent;
+with Ada.Text_Io,Ada.Integer_Text_Io,dates,gestion_pile,declaration_adherent,menu_principal,abr_adher;
+use Ada.Text_Io,Ada.Integer_Text_Io,dates,gestion_pile,declaration_adherent,menu_principal,abr_adher;
 
 
 procedure Main is 
@@ -28,17 +28,20 @@ begin
 						when '1'=>
 							Put_Line("*** Ajouter un adherent***");
 							ajout_adherent(PteurPileA);
+							Affichage_Pile (PteurPileA);
+							insert_ABR(PteurPileA,Arbre);
 							exit;
 						when '2'=>
 							Put_Line("*** Chercher un adherent***");
 							gestion_pile.saisie_nom_prenom(nomadherent,prenomadherent);
 							gestion_pile.Affichage_info_adh_pile (PteurPileA,nomadherent,prenomadherent,trouve);
 							-- procedure adherent_archive
+							exit;
          		when '3' =>
          			Put_Line("*** Affichage des adherents en mode prefixe ***");
       				abr_adher.affich_Prefixe_ABR(Arbre);
-              New_Line;
-             	exit;                
+             		New_Line;
+             		exit;                
             when '4'=>
             	exit;
             when others =>
@@ -51,10 +54,9 @@ begin
         	menu_principal.affichage_partie_reservation(choix1);
           case choix1 is
           	when '1'=>
-                     Put_Line("*** Reservation des creneaux ***");
-                     Reservation_Creneau(PteurPileA,plan_act);
+           		Put_Line("*** Reservation des creneaux ***");
 							New_Line;
-							
+							-- procedure réservation des créneaux
 							exit;
 						when '2'=>
 							Put_Line("*** Annulation des creneaux ***");
@@ -86,15 +88,15 @@ begin
         	menu_principal.affichage_partie_archive(choix1);
           case choix1 is
           	when '1'=>
-							Put_Line("*** ARCHIVE ***");
-              --procedure Lecture;
-							New_Line;
-							exit;
-						when '2'=>
-							exit;
+				Put_Line("*** ARCHIVE ***");
+              	--procedure Lecture;
+				New_Line;
+				exit;
+			when '2'=>
+				exit;
          		when others =>
             	Put_Line("Choix inconnu, recommencer");
-					end case;
+			end case;
         end loop;
 
       when '4'=>

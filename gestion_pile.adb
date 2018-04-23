@@ -56,8 +56,7 @@ PROCEDURE Saisie_activite (acti : out declaration_adherent.T_Contrat) is
 Procedure deja_inscrit (infos : declaration_adherent.T_Adherent ; Pteur : T_PteurPileAdherents ; inscrit : out boolean ; meme_contrat : out boolean) is
 begin
 	if Pteur = null then inscrit := false ; meme_contrat := false;
-   else if Pteur.Adherent.Nom=Infos.Nom and then Pteur.Adherent.Prenom=Infos.Prenom and then Pteur.Adherent.Datenaissance.Jour=Infos.Datenaissance.Jour and then Pteur.Adherent.Datenaissance.Mois=Infos.Datenaissance.Mois 
-      and then Pteur.adherent.datenaissance.annee=infos.datenaissance.annee then
+	else if Pteur.adherent.nom=infos.nom and then Pteur.adherent.prenom=infos.prenom and then Pteur.adherent.datenaissance.jour=infos.datenaissance.jour and then Pteur.adherent.datenaissance.mois=infos.datenaissance.mois and then Pteur.adherent.datenaissance.annee=infos.datenaissance.annee then
 			inscrit := true;
 			if declaration_adherent.T_Contrat'image(Pteur.adherent.Typecontrat)=declaration_adherent.T_Contrat'image(infos.Typecontrat) then
 			meme_contrat:=true;
@@ -105,7 +104,7 @@ begin
 		put ("Erreur, recommencer la saisie de la date de naissance");
 		new_line;
 	end loop;
-
+	InfoAdherent.datenaissance := date_adherent;
 	new_line;
 	put("Saisir votre activité, 'Fitness', 'Aqua', 'AquaEtFitness' : ");
 	Saisie_activite(act);
@@ -168,24 +167,30 @@ begin
 			dates.affichage_date(Pteur.adherent.DateNaissance);
 			new_line; new_line;
 			trouve:=true;
-		else Affichage_info_adh_pile(Pteur.suiv,nomAdh, prenomAdh,trouve);
+		else Affichage_info_adh_pile(Pteur.suiv,nomAdh,prenomAdh,trouve);
 		end if;
 	else trouve:=false;
 	end if;
 end Affichage_info_adh_pile;
 
+Procedure Affichage_Pile (Pteur : T_PteurPileAdherents) is
+begin
+	if pteur /= null then 
+		put(Pteur.adherent.nom);
+		Affichage_Pile(pteur.suiv);
+	end if;
+end Affichage_Pile;
+
 Procedure saisie_nom_prenom (nomAdh,prenomAdh: out declaration_adherent.mot) is
 begin
-	new_line;
-	Put("Saisie nom de la personne : ");
-	Saisie_mot(nomAdh);
+	nomAdh:=(others=>' ');
+	prenomAdh:=(others=>' ');
 	new_line;
 	put("Saisie prenom de la personne : ");
 	Saisie_mot(prenomAdh);
+	Put("Saisie nom de la personne : ");
+	Saisie_mot(nomAdh);
+	new_line;
 end saisie_nom_prenom;
-
-
-
-
 
 end gestion_pile;
