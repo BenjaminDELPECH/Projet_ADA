@@ -4,7 +4,7 @@ package abr_adher is
    type T_Noeud;
    type T_Arbre_adh is access T_Noeud;
    type T_Noeud is record
-      Adh:declaration_adherent.T_Adherent;
+      Adh:gestion_pile.T_CelluleAdherents;
       Fg,Fd:T_Arbre_adh;
    end record;
    
