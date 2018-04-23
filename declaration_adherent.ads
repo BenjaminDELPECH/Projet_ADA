@@ -56,13 +56,17 @@ end record;
    Type T_Creneau_gen is record
       Aqua:T_Creneau_Aqua_gen;
       Fitness:T_Creneau_Fitness_gen;
+      archive:boolean:=False;
    end record;
    
    type T_Jour_Gen is array(Integer range 1..6)of T_Creneau_Gen;
    type T_Planning_General is array(Integer range 1..6)of T_Jour_gen;
-
---Creneau pour les planning persos.
-
+   
+   
+ --Planning Semaine1, Semaine 2 et actuel  
+   Plan_Act: T_Planning_General;
+   Plan_Suiv: T_Planning_General;
+   Plan_Vide: T_Planning_General;
 
    
 
