@@ -15,10 +15,7 @@ procedure Main is
 begin
 	donnee.initialisation_donnees(informations_init_adherents);
 	Ajout_Dans_Pile(informations_init_adherents,PteurPileA);
-	Affichage_Pile(PteurPileA);
 	initialisation_ABR(PteurPileA,Arbre);
-	Affichage_Pile(PteurPileA);
-
 	while sortie=false loop
 		menu_principal.affichage_menu_principal(choix);
 		case choix is
