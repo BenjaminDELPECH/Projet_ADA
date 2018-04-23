@@ -15,7 +15,9 @@ procedure Main is
 begin
 	donnee.initialisation_donnees(informations_init_adherents);
 	Ajout_Dans_Pile(informations_init_adherents,PteurPileA);
-	abr_adher.initialisation_ABR(PteurPileA,Arbre);
+	Affichage_Pile(PteurPileA);
+	initialisation_ABR(PteurPileA,Arbre);
+	Affichage_Pile(PteurPileA);
 
 	while sortie=false loop
 		menu_principal.affichage_menu_principal(choix);
@@ -28,7 +30,6 @@ begin
 							Put_Line("*** Ajouter un adherent***");
 							ajout_adherent(PteurPileA);
 							insert_ABR(PteurPileA,Arbre);
-							Affichage_ABR(Arbre);
 							exit;
 						when '2'=>
 							Put_Line("*** Chercher un adherent***");
@@ -41,7 +42,6 @@ begin
          		when '3' =>
          			Put_Line("*** Affichage des adherents en mode prefixe ***");
       				abr_adher.affich_Prefixe_ABR(Arbre);
-      				abr_adher.affichage_abr(Arbre);
       				Retour_Menu_Principal;
              		exit;                
             when '4'=>

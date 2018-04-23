@@ -13,10 +13,10 @@ package abr_adher is
       Noeud_Arbre : T_Arbre_adh) return boolean;
 
 	Procedure insert_ABR (PteurAdherant : gestion_pile.T_PteurPileAdherents ; 
-      A : IN OUT T_Arbre_adh);
+      Arbre_de_vie : IN OUT T_Arbre_adh);
 
-   Procedure initialisation_ABR (Pteur: in out gestion_pile.T_PteurPileAdherents ; 
-   	A : out T_Arbre_adh);
+Procedure initialisation_ABR (Pteur:gestion_pile.T_PteurPileAdherents ; 
+	A : out T_Arbre_adh);
 
    Procedure affich_Prefixe_ABR (A : IN T_Arbre_adh);
    Procedure Affichage_ABR ( A : T_Arbre_adh);

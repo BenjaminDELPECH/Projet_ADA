@@ -31,22 +31,22 @@ package body abr_adher is
 end Meme_nom_prenom;
 
    Procedure insert_ABR (PteurAdherant : gestion_pile.T_PteurPileAdherents ; 
-      A : IN OUT T_Arbre_adh) is
+      Arbre_de_vie : IN OUT T_Arbre_adh) is
    begin
-      if A=null then
-         A:= new T_Noeud'(PteurAdherant, null, null);
-      elsif not Nom_Prenom_Sup(PteurAdherant,A) then
-         Insert_Abr(PteurAdherant, A.Fg);
+      if Arbre_de_vie=null then
+         Arbre_de_vie:= new T_Noeud'(PteurAdherant, null, null);
+      elsif not Nom_Prenom_Sup(PteurAdherant,Arbre_de_vie) then
+         Insert_Abr(PteurAdherant, Arbre_de_vie.Fg);
       else
-         Insert_Abr(PteurAdherant, A.Fd);
+         Insert_Abr(PteurAdherant, Arbre_de_vie.Fd);
       end if;
    end Insert_Abr;
 
-Procedure initialisation_ABR (Pteur:in out gestion_pile.T_PteurPileAdherents ; A : out T_Arbre_adh) is
-begin
+Procedure initialisation_ABR (Pteur:gestion_pile.T_PteurPileAdherents ; A : out T_Arbre_adh) is
+   begin
    if pteur /= null then 
       insert_ABR(Pteur,A);
-      pteur:=pteur.suiv;
+      initialisation_ABR(Pteur.suiv,A);
    end if;
 end initialisation_ABR;
 
