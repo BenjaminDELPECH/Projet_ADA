@@ -13,5 +13,7 @@ subtype intervale_mois is integer range 1..12;
 
     Function verification_date_bisextile (d : T_Date) return boolean;
     Procedure saisie_date (d : out T_Date; fait : out boolean);
+    procedure Passer_Jour_Suivant(D:in out T_Date);
+    procedure affichage_date(D : T_Date);
 
 end dates;

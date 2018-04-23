@@ -33,7 +33,7 @@ begin
 							Put_Line("*** Chercher un adherent***");
 							gestion_pile.saisie_nom_prenom(nomadherent,prenomadherent);
 							gestion_pile.Affichage_info_adh_pile (PteurPileA,nomadherent,prenomadherent,trouve);
-							-- procedure arherent_archive
+							-- procedure adherent_archive
          		when '3' =>
          			Put_Line("*** Affichage des adherents en mode prefixe ***");
       				abr_adher.affich_Prefixe_ABR(Arbre);
@@ -66,9 +66,12 @@ begin
               -- procedure affichage des adherents d'un créneau
               exit;
             when '4'=>
-            	Put_Line("*** Mise a jour de la date ***");
+              Put_Line("*** Mise a jour de la date ***");
               New_Line;
-              --procedure mise à jour de la date
+              Passer_Jour_Suivant(date_jour);
+              put ("Date passée au jour suivant, il est maintenant le : ");
+              affichage_date(date_jour);
+              new_line;
               exit;
             when '5'=>
             	exit;

@@ -83,7 +83,7 @@ end Saisie_Date;
 
 --Benjamin plus pratique de mettre jour suivant ici
 
-procedure Passer_Jour_Suivant(D:in out T_Date)is
+procedure Passer_Jour_Suivant(D:in out T_Date) is
 begin
   --on passe au jour suivant
    D.Jour:=D.Jour+1;
@@ -109,7 +109,15 @@ begin
    end case;
    
 end Passer_Jour_Suivant;
-         
+
+procedure affichage_date(D : T_Date) is
+begin
+   put(D.jour,width=>0);
+   put("/");
+   put(D.mois,width=>0);
+   put("/");
+   put(D.annee,width=>0);
+end affichage_date;
 
       
       
