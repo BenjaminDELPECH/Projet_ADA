@@ -53,12 +53,17 @@ PROCEDURE Saisie_activite (acti : out declaration_adherent.T_Contrat) is
       END LOOP;
    END Saisie_activite;
 
-Procedure deja_inscrit (infos : declaration_adherent.T_Adherent ; Pteur : T_PteurPileAdherents ; inscrit : out boolean ; meme_contrat : out boolean) is
+Procedure deja_inscrit (infos : declaration_adherent.T_Adherent ; Pteur : T_PteurPileAdherents ; 
+	inscrit : out boolean ; meme_contrat : out boolean) is
 begin
 	if Pteur = null then inscrit := false ; meme_contrat := false;
-	else if Pteur.adherent.nom=infos.nom and then Pteur.adherent.prenom=infos.prenom and then Pteur.adherent.datenaissance.jour=infos.datenaissance.jour and then Pteur.adherent.datenaissance.mois=infos.datenaissance.mois and then Pteur.adherent.datenaissance.annee=infos.datenaissance.annee then
+	else if Pteur.adherent.nom=infos.nom and then Pteur.adherent.prenom=infos.prenom 
+	and then Pteur.adherent.datenaissance.jour=infos.datenaissance.jour 
+	and then Pteur.adherent.datenaissance.mois=infos.datenaissance.mois 
+	and then Pteur.adherent.datenaissance.annee=infos.datenaissance.annee then
 			inscrit := true;
-			if declaration_adherent.T_Contrat'image(Pteur.adherent.Typecontrat)=declaration_adherent.T_Contrat'image(infos.Typecontrat) then
+			if declaration_adherent.T_Contrat'image(Pteur.adherent.Typecontrat)=
+			declaration_adherent.T_Contrat'image(infos.Typecontrat) then
 			meme_contrat:=true;
 			else meme_contrat:=false;
 			end if;
@@ -67,7 +72,8 @@ begin
 	end if;
 end deja_inscrit;
 
-Procedure modification_contrat (infos : declaration_adherent.T_Adherent ; Pteur : in out T_PteurPileAdherents) is
+Procedure modification_contrat (infos : declaration_adherent.T_Adherent ; 
+	Pteur : in out T_PteurPileAdherents) is
 begin
 	if Pteur /= null then
 		if Pteur.adherent.nom=infos.nom and then Pteur.adherent.prenom=infos.prenom then
@@ -154,7 +160,8 @@ begin
 	end if;
 end ajout_adherent;
 
-Procedure Affichage_info_adh_pile (Pteur : T_PteurPileAdherents ; nomAdh, prenomAdh : declaration_adherent.mot; trouve : out boolean) is
+Procedure Affichage_info_adh_pile (Pteur : T_PteurPileAdherents ; 
+	nomAdh, prenomAdh : declaration_adherent.mot; trouve : out boolean) is
 begin
 	if Pteur/=null then
 		if nomAdh=Pteur.adherent.nom and then prenomAdh=Pteur.adherent.prenom then
