@@ -3,18 +3,15 @@ use Ada.Text_Io,Ada.Integer_Text_Io;
 
 package body abr_adher is 
 
-   -- function Nom_Prenom_Sup (Pteur: gestion_pile.T_PteurPileAdherents ; A.adh:declaration_adherent.T_Adherent) return boolean is
+   -- function Nom_Prenom_Sup (PteurPile : gestion_pile.T_PteurPileAdherents ; Noeud_Arbre : T_Noeud) return boolean is
    -- begin
       -- True si le nom de la pile est > au nom de l'ABR
-      -- if A/= null then
-         -- if Pteur.Adherent.Nom > A.Adh.Nom or
-               -- (Pteur.Adherent.Nom = A.Adh.Nom 
-                  -- AND Pteur.Adherent.Prenom > A.Adh.Prenom) then
+         -- if PteurPile.adherent.nom > Noeud_Arbre.Adh.adherent.Nom or
+               -- (PteurPile.adherent.nom = Noeud_Arbre.Adh.adherent.Nom 
+                  -- AND Cellule_Pile_Adh.adherent.prenom > Noeud_Arbre.Adh.Prenom) then
          -- return True;
          -- else return False;
        -- end if;
-      -- else return false;
-      -- end if;
    -- end Nom_Prenom_Sup;
 
    -- Procedure Meme_nom_prenom (A : T_Arbre_adh ; infos : declaration_adherent.T_Adherent) is
@@ -27,16 +24,16 @@ package body abr_adher is
 -- end Meme_nom_prenom;
 
 
-   -- Procedure insert_ABR (Pteur : IN gestion_pile.T_PteurPileAdherents ; A : IN OUT T_Arbre_adh) is
-   -- begin
-   --    if A=null then
-   --       A:= new T_Noeud'(Pteur.adherent, null, null);
-   --    elsif not Nom_Prenom_Sup(Pteur,A) then
-   --       Inser_Abr(Pteur, A.Fg);
-   --    else
-   --       Insert_Abr(Pteur, A.Fd);
-   --    end if;
-   -- end Insert_Abr;
+   Procedure insert_ABR (Pteur : IN gestion_pile.T_PteurPileAdherents ; A : IN OUT T_Arbre_adh) is
+   begin
+      if A=null then
+         A:= new T_Noeud'(Pteur.adherent, null, null);
+      elsif not Nom_Prenom_Sup(Pteur,A) then
+         Insert_Abr(Pteur, A.Fg);
+      else
+         Insert_Abr(Pteur, A.Fd);
+      end if;
+   end Insert_Abr;
 
    Procedure affich_Prefixe_ABR (A : IN T_Arbre_adh) is
       begin
