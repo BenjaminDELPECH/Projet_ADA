@@ -1,5 +1,5 @@
-with ada.text_io,ada.integer_text_io;
-use ada.text_io,ada.integer_text_io;
+with ada.text_io,ada.integer_text_io,declaration_adherent;
+use ada.text_io,ada.integer_text_io,declaration_adherent;
 
 Package body gestion_pile is
 
@@ -169,10 +169,17 @@ begin
 			put ("Adherent au club depuis : ");
 			dates.affichage_date(Pteur.adherent.DateDerniereAdhesion);
 			new_line;
-			new_line;
 			put ("Date de naissance : ");
 			dates.affichage_date(Pteur.adherent.DateNaissance);
-			new_line; new_line;
+			new_line;
+			put("Contrat de l'adhérent : ");
+			if Pteur.adherent.typecontrat=aqua then 
+				put("Aqua");
+			elsif Pteur.adherent.TypeContrat=fitness then
+				put("Fitness");
+			else put("Aqua et Fitness");
+			end if;
+			new_line;
 			trouve:=true;
 		else Affichage_info_adh_pile(Pteur.suiv,nomAdh,prenomAdh,trouve);
 		end if;
