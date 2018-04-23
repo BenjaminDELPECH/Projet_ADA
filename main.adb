@@ -1,5 +1,5 @@
-with Ada.Text_Io,Ada.Integer_Text_Io,dates,gestion_pile,declaration_adherent,menu_principal,abr_adher;
-use Ada.Text_Io,Ada.Integer_Text_Io,dates,gestion_pile,declaration_adherent,menu_principal,abr_adher;
+with Ada.Text_Io,Ada.Integer_Text_Io,dates,gestion_pile,declaration_adherent,menu_principal,abr_adher,donnee;
+use Ada.Text_Io,Ada.Integer_Text_Io,dates,gestion_pile,declaration_adherent,menu_principal,abr_adher,donnee;
 
 
 procedure Main is 
@@ -10,13 +10,11 @@ procedure Main is
 	Arbre : abr_adher.T_Arbre_Adh;
 	nomadherent,prenomadherent : declaration_adherent.mot;
 	trouve : boolean;
+	informations_init_adherents : declaration_adherent.T_Tabadherents(0..9);
 
 begin
-	Put_Line("======");
-	New_Line;
-	Put_Line("Bienvenue dans le programme de gestion de votre club de sport");
-	New_Line;
-	Put_Line("=====");
+	donnee.initialisation_donnees(informations_init_adherents);
+	Ajout_Dans_Pile(informations_init_adherents,PteurPileA);
 
 	while sortie=false loop
 		menu_principal.affichage_menu_principal(choix);
