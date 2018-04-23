@@ -1,4 +1,5 @@
 with gestion_pile, declaration_adherent;
+use gestion_pile,declaration_adherent;
 
 package abr_adher is 
    type T_Noeud;
@@ -11,8 +12,11 @@ package abr_adher is
   function Nom_Prenom_Sup (PteurPile : gestion_pile.T_PteurPileAdherents ; 
       Noeud_Arbre : T_Arbre_adh) return boolean;
 
-   Procedure insert_ABR (Pteur : IN gestion_pile.T_PteurPileAdherents ; 
+	Procedure insert_ABR (PteurAdherant : gestion_pile.T_PteurPileAdherents ; 
       A : IN OUT T_Arbre_adh);
+
+   Procedure initialisation_ABR (Pteur: in out gestion_pile.T_PteurPileAdherents ; 
+   	A : out T_Arbre_adh);
 
    Procedure affich_Prefixe_ABR (A : IN T_Arbre_adh);
    Procedure Affichage_ABR ( A : T_Arbre_adh);
