@@ -1,5 +1,7 @@
-with Ada.Text_Io,Ada.Integer_Text_Io,dates,gestion_pile,declaration_adherent,menu_principal,abr_adher,donnee;
-use Ada.Text_Io,Ada.Integer_Text_Io,dates,gestion_pile,declaration_adherent,menu_principal,abr_adher,donnee;
+with Ada.Text_Io,Ada.Integer_Text_Io,dates,gestion_pile,
+declaration_adherent,menu_principal,abr_adher,donnee;
+use Ada.Text_Io,Ada.Integer_Text_Io,dates,gestion_pile,
+declaration_adherent,menu_principal,abr_adher,donnee;
 
 
 procedure Main is 
@@ -30,14 +32,16 @@ begin
 							exit;
 						when '2'=>
 							Put_Line("*** Chercher un adherent***");
-							gestion_pile.saisie_nom_prenom(nomadherent,prenomadherent);
-							gestion_pile.Affichage_info_adh_pile (PteurPileA,nomadherent,prenomadherent,trouve);
+							gestion_pile.saisie_nom_prenom
+							(nomadherent,prenomadherent);
+							gestion_pile.Affichage_info_adh_pile 
+							(PteurPileA,nomadherent,prenomadherent,trouve);
 							-- procedure adherent_archive
 							new_line;
 							Retour_Menu_Principal;
 							exit;
          		when '3' =>
-         			Put_Line("*** Affichage des adherents en mode prefixe ***");
+         		Put_Line("*** Affichage des adherents en mode prefixe ***");
       				abr_adher.affich_Prefixe_ABR(Arbre);
       				Retour_Menu_Principal;
              		exit;                
