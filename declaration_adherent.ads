@@ -42,14 +42,14 @@ end record;
     Type T_Creneau_Aqua_gen is record
       Tabinscrit:T_Tabadherents(1..N);
       Taille:Integer:=0;
-      Open:Boolean;
+      Open:Boolean:= False;
    end record;
 
 
    Type T_Creneau_Fitness_gen is record
       Tabinscrit:T_Tabadherents(1..N);
       Taille:Integer:=0;
-      Open:Boolean;
+      Open:Boolean:= False;
    end record;
       
    
