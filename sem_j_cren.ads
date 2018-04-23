@@ -20,8 +20,8 @@ package Sem_J_Cren is
       
    
    Type T_Creneau_gen is record
-      Aqua:T_Creneau_Aqua;
-      Fitness:T_Creneau_Fitness;
+      Aqua:T_Creneau_Aqua_gen;
+      Fitness:T_Creneau_Fitness_gen;
    end record;
    
    type T_Jour_Gen is array(Integer range 1..6)of T_Creneau_Gen;
