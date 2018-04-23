@@ -28,19 +28,26 @@ begin
 						when '1'=>
 							Put_Line("*** Ajouter un adherent***");
 							ajout_adherent(PteurPileA);
-							Affichage_Pile (PteurPileA);
 							insert_ABR(PteurPileA,Arbre);
+							Affichage_ABR(Arbre);
 							exit;
 						when '2'=>
 							Put_Line("*** Chercher un adherent***");
 							gestion_pile.saisie_nom_prenom(nomadherent,prenomadherent);
 							gestion_pile.Affichage_info_adh_pile (PteurPileA,nomadherent,prenomadherent,trouve);
 							-- procedure adherent_archive
+							new_line;
+							put ("Appuyez sur entrer pour retourner au menu principal");
+							new_line;
+							skip_line;
 							exit;
          		when '3' =>
          			Put_Line("*** Affichage des adherents en mode prefixe ***");
       				abr_adher.affich_Prefixe_ABR(Arbre);
              		New_Line;
+					put ("Appuyez sur entrer pour retourner au menu principal");
+					new_line;
+					skip_line;
              		exit;                
             when '4'=>
             	exit;
@@ -55,26 +62,42 @@ begin
           case choix1 is
           	when '1'=>
            		Put_Line("*** Reservation des creneaux ***");
-							New_Line;
+				New_Line;
 							-- procedure réservation des créneaux
-							exit;
-						when '2'=>
-							Put_Line("*** Annulation des creneaux ***");
-              New_line;
+				new_line;
+				put ("Appuyez sur entrer pour retourner au menu principal");
+				new_line;
+				skip_line;
+				exit;
+			when '2'=>
+				Put_Line("*** Annulation des creneaux ***");
+             	New_line;
               -- procedure annulation des créneaux
+				new_line;
+				put ("Appuyez sur entrer pour retourner au menu principal");
+				new_line;
+				skip_line;
               exit;
             when '3'=>
             	Put_Line("*** Affichage des adherents d'un creneau ***");
-              New_Line;
-              -- procedure affichage des adherents d'un créneau
+            	New_Line;
+              	-- procedure affichage des adherents d'un créneau
+				new_line;
+				put ("Appuyez sur entrer pour retourner au menu principal");
+				new_line;
+				skip_line;
               exit;
             when '4'=>
-              Put_Line("*** Mise a jour de la date ***");
-              New_Line;
-              Passer_Jour_Suivant(date_jour);
-              put ("Date passée au jour suivant, il est maintenant le : ");
-              affichage_date(date_jour);
-              new_line;
+            	Put_Line("*** Mise a jour de la date ***");
+            	New_Line;
+            	Passer_Jour_Suivant(date_jour);
+            	put ("Date passée au jour suivant, il est maintenant le : ");
+            	affichage_date(date_jour);
+            	new_line;
+				new_line;
+				put ("Appuyez sur entrer pour retourner au menu principal");
+				new_line;
+				skip_line;
               exit;
             when '5'=>
             	exit;
