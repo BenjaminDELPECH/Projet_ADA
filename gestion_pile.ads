@@ -4,7 +4,7 @@ package gestion_pile is
 
 SUBTYPE Mot14 IS String (1..14); -- saisie activite
 Type T_CelluleAdherents;
-Type  T_PteurPileAdherents is access T_CelluleAdherents;
+Type T_PteurPileAdherents is access T_CelluleAdherents;
 Type T_CelluleAdherents is record
 	Adherent : declaration_adherent.T_Adherent;
 	suiv : T_PteurPileAdherents;
@@ -16,5 +16,6 @@ Procedure deja_inscrit (infos : declaration_adherent.T_Adherent ; Pteur : T_Pteu
 Procedure modification_contrat (infos : declaration_adherent.T_Adherent ; Pteur : in out T_PteurPileAdherents);
 Procedure ajout_adherent (Pteur : in out T_PteurPileAdherents);
 Procedure Affichage_info_adh_pile (Pteur : T_PteurPileAdherents ; nomAdh, prenomAdh : declaration_adherent.mot; trouve : out boolean);
+Procedure Affichage_Pile (Pteur : T_PteurPileAdherents);
 Procedure saisie_nom_prenom (nomAdh,prenomAdh: out declaration_adherent.mot);
 end gestion_pile;
