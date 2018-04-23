@@ -92,7 +92,7 @@ package body donnee is
    procedure Ajout_Dans_Pile (Tab : in declaration_adherent.T_Tabadherents; P : in out gestion_pile.T_Pteurpileadherents ) is
    reccup : declaration_adherent.T_Adherent; 
    begin
-      for I in 0..9 loop
+      for I in Tab'range loop
          Reccup := Tab(I);
          P:= New gestion_pile.T_CelluleAdherents'(Reccup, P);
       end loop;         
