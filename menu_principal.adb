@@ -13,6 +13,14 @@ begin
    return c;
 end saisie_choix;
 
+Procedure Retour_Menu_Principal is
+begin
+   new_line;
+   put ("Appuyez sur entrer pour retourner au menu principal");
+   new_line;
+   skip_line;
+end Retour_Menu_Principal;
+
 procedure Affichage_Menu_principal (char : out character) is
 
 begin
@@ -30,7 +38,6 @@ begin
       Put_Line("   2 : Gerer les reservations");
       Put_Line("   3 : Sauvegarde");
       Put_Line("   4 : Quitter");
-      Put_Line("   Votre choix ? ");
       New_Line(2);
       char:=saisie_choix;
 end Affichage_Menu_principal;
