@@ -1,7 +1,7 @@
 with Ada.Text_Io,Ada.Integer_Text_Io,dates,gestion_pile,affichage,
-declaration_adherent,menu_principal,abr_adher,donnee,action_adherent;
+declaration_adherent,menu_principal,abr_adher,donnee,action_adherent,jour_suiv;
 use Ada.Text_Io,Ada.Integer_Text_Io,dates,gestion_pile,affichage,
-declaration_adherent,menu_principal,abr_adher,donnee,action_adherent;
+declaration_adherent,menu_principal,abr_adher,donnee,action_adherent,jour_suiv;
 
 procedure Main is 
 
@@ -13,6 +13,7 @@ procedure Main is
 	trouve : boolean;
 	informations_init_adherents : declaration_adherent.T_Tabadherents(0..9);
        P1,P2:T_Planning_general;
+  Jour_actuel:jour_suiv.T_Semaine:=Mercredi;
 begin
 	donnee.initialisation_donnees(informations_init_adherents,P1,P2);
 	Ajout_Dans_Pile(informations_init_adherents,PteurPileA);
@@ -46,14 +47,7 @@ begin
       				abr_adher.affich_Prefixe_ABR(Arbre);
       				Retour_Menu_Principal;
              		exit;                
-                  when '4'=>
-                     Put_Line("*** Supprimmer un adherent ***");
-      				Supprimmer_Adherent(PteurPileA,P1,P2);
-                     Retour_Menu_Principal;
-                 when '5'=>
-Retour_Menu_Principal;
-
-
+            when '4'=>
             	exit;
             when others =>
             	Put_Line("Choix inconnu, recommencer");
@@ -75,7 +69,7 @@ Retour_Menu_Principal;
 				Put_Line("*** Annulation des creneaux ***");
              	New_line;
             	-- procedure annulation des créneaux
-            Annuler_Creneau(PteurPileA,Arbre,P2);
+               Annuler_Creneau(PteurPileA,Arbre,P2);
 				Retour_Menu_Principal;
             	exit;
             when '3'=>
@@ -96,10 +90,12 @@ Retour_Menu_Principal;
             when '5'=>
             	Put_Line("*** Mise a jour de la date ***");
             	New_Line;
-            	Passer_Jour_Suivant(date_jour);
+            	jour_suiv.Passer_Jour_Suivant(date_jour,Jour_actuel);
             	put ("Date passée au jour suivant, il est maintenant le : ");
             	affichage_date(date_jour);
             	new_line;
+              Renouvellement_Adherent(Arbre,date_jour,PteurPileA,P1,P2);
+              Initialisation_ABR(PteurPileA,Arbre);
             	Retour_Menu_Principal;
             	exit;
             when '6'=>

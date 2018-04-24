@@ -13,10 +13,14 @@ Tete:gestion_pile.T_Pteurpileadherents;
       P2:in out Declaration_Adherent.T_Planning_General
 );
     
-procedure Choix_Jour(P:in out Declaration_Adherent.T_Planning_General;Choix_Sem:integer;ChoixAdh:integer; Tete : in out Gestion_Pile.T_Pteurpileadherents
+procedure Choix_Jour(P:in out Declaration_Adherent.T_Planning_General;
+	Choix_Sem:integer;ChoixAdh:integer; Tete : in out Gestion_Pile.T_Pteurpileadherents
       );
+procedure Annuler_Creneau(Tete:Gestion_Pile.T_Pteurpileadherents;
+	Arbre_de_vie:abr_adher.T_Arbre_adh;P2:T_Planning_General);
 
-procedure Annuler_Creneau(Tete:Gestion_Pile.T_Pteurpileadherents;Arbre_de_vie:abr_adher.T_Arbre_adh;P2:T_Planning_General);
-procedure Supprimmer_Adherent(Tete: in out Gestion_Pile.T_Pteurpileadherents;P1:in out T_planning_general;P2:in out T_planning_general);    
+procedure Supprimmer_Adherent(Tete: in out Gestion_Pile.T_Pteurpileadherents;
+	P1:in out T_planning_general;P2:in out T_planning_general);
+      
 
 end action_adherent;

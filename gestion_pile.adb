@@ -1,5 +1,5 @@
-with ada.text_io,ada.integer_text_io,declaration_adherent;
-use ada.text_io,ada.integer_text_io,declaration_adherent;
+with ada.text_io,ada.integer_text_io,declaration_adherent,dates;
+use ada.text_io,ada.integer_text_io,declaration_adherent,dates;
 
 Package body gestion_pile is
 
@@ -78,7 +78,8 @@ Procedure modification_contrat (infos : declaration_adherent.T_Adherent ;
 begin
 	if Pteur /= null then
 		if Pteur.adherent.nom=infos.nom and then 
-		Pteur.adherent.prenom=infos.prenom then
+		Pteur.adherent.prenom=infos.prenom and then
+		Pteur.adherent.DateNaissance=infos.datenaissance then
 		Pteur.adherent.Typecontrat:=infos.Typecontrat;
 		else modification_contrat(infos,Pteur.suiv);
 		end if;

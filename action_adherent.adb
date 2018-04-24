@@ -3,12 +3,7 @@ use Ada.Text_Io;
 
 package body Action_Adherent is
 
-
-
-
-
-
-   procedure Supprimmer_Adherent(Tete: in out Gestion_Pile.T_Pteurpileadherents;P1:in out T_planning_general;P2:in out T_planning_general)is
+procedure Supprimmer_Adherent(Tete: in out Gestion_Pile.T_Pteurpileadherents;P1:in out T_planning_general;P2:in out T_planning_general)is
      Etape_Suiv:boolean;
       Tmp7,Tete2: Gestion_Pile.T_Pteurpileadherents := Tete;
       J:Integer:=0;
@@ -39,7 +34,7 @@ if tete /= null then
             tmp7:=Tmp7.suiv;
             New_Line;
          end loop;
-         put("Saisir le numÃ©ro de l'adhÃ©rent : ");
+         put("Saisir le numéro de l'adhérent : ");
          loop
              begin
                  Get(Choixadh);
@@ -67,7 +62,7 @@ if tete /= null then
           tmp7.suiv:=Tmp7.suiv.suiv;
        
        end loop;
-       Put("Adherent supprimmer");
+       Put("Adherent supprimmé");
 
 
 
@@ -75,13 +70,7 @@ if tete /= null then
 end Supprimmer_adherent;
 
 
-
-
-
-
-
-
- procedure Supprimmer_creneau (
+procedure Supprimmer_creneau (
          P: in out T_Planning_general;
          activite:T_Activite;
          Cj        : in     Integer;
@@ -114,10 +103,6 @@ end Supprimmer_adherent;
 end Supprimmer_creneau;
 
 
-
-
-
-
    procedure Annuler_Creneau(Tete:Gestion_Pile.T_Pteurpileadherents;Arbre_de_vie:abr_adher.T_Arbre_adh;P2:T_Planning_General)is
    Etape_Suiv:boolean;
       Tmp4,Tmp5,Tete2: Gestion_Pile.T_Pteurpileadherents := Tete;
@@ -145,7 +130,7 @@ end Supprimmer_creneau;
             tmp4:=Tmp4.suiv;
             New_Line;
          end loop;
-         put("Saisir le numÃ©ro de l'adhÃ©rent : ");
+         put("Saisir le numéro de l'adhérent : ");
          loop
              begin
                  Get(Choixadh);
@@ -242,24 +227,20 @@ end Supprimmer_creneau;
                         end;
                      end loop;
 
-                     if Tmp5.Adherent.Planingsemaine2(ChoixJour)(Choixhoraire).Present = True then new_line;Put_line("Vous avez une reservation à ce creneau, SOUHAITEZ VOUS ANNULER?");
+                     if Tmp5.Adherent.Planingsemaine2(ChoixJour)(Choixhoraire).Present = True then new_line;
+                     Put_line("Vous avez une reservation à ce creneau, SOUHAITEZ VOUS ANNULER?");
                         new_line;
                         Put_line("1=>OUI");
                         Put_line("2=>NON");
                         new_line;
                         Get(Choixannuler);
-                     else new_line;Put_line("VOUS nAVEZ PAS DE RESERVATION A CE CRENEAU");new_line;end if;
+                     else new_line;Put_line("VOUS N'AVEZ PAS DE RESERVATION A CE CRENEAU");new_line;end if;
                      if Choixannuler = 1 then
                        activite:=Tmp5.Adherent.Planingsemaine2(ChoixJour)(Choixhoraire).activite;
                         Supprimmer_creneau(P,activite,Choixjour,Choixhoraire,ChoixAdh,Tete2);
-                        end if;
+                       end if;
 
 end Annuler_Creneau;
-
-
-
-
-
 
    procedure Edit_Planning (
          P: in out T_Planning_general;
