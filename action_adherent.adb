@@ -14,7 +14,7 @@ package body Action_Adherent is
       
       Tmp       : Gestion_Pile.T_Pteurpileadherents := tete;
       Verif      : Boolean                           := False;
-      Adh        : T_Adherent;
+      -- Adh        : T_Adherent;
       Act_Choose : T_Activite;
 
    begin
@@ -157,18 +157,45 @@ loop
          
          New_Line;
          New_Line;
-         Get(Choixact);
-         Skip_Line;
+         loop
+            begin
+               Get(Choixact);
+               Skip_Line;
+               exit when choixact=1 or choixact=2;
+               new_line;
+               put("Saisissez un chiffre proposé "); 
+               new_line;
+               exception
+                     when data_error=>skip_line;
+                     put("Erreur, veuillez recommencer la saisie "); new_line;
+                     when constraint_error=>skip_line;
+                     put("Erreur, veuillez recommencer la saisie "); new_line;  
+                  end;
+         end loop;
+
 
       elsif(tmp2.Adherent.Typecontrat=Aqua and
 
-         Cren.Aqua.Open = False and Cren.Aqua.Tabinscrit(N).Datenaissance.Annee=1 and Cren.Aqua.Taille < N)then
+         Cren.Aqua.Open = False and Cren.Aqua.Tabinscrit(N).Datenaissance.Annee=1 
+         and Cren.Aqua.Taille < N)then
          Put_Line("1 pour Reserver Aqua");
         
          New_Line;
          New_Line;
-         Get(Choixact);
-         Skip_Line;
+         loop
+         begin
+         Get(Choixact);skip_line;
+         exit when choixact=1;
+         new_line;
+         put("Saisir un chiffre proposé");
+         new_line;
+            exception
+                     when data_error=>skip_line;
+                     put("Erreur, veuillez recommencer la saisie "); new_line;
+                     when constraint_error=>skip_line;
+                     put("Erreur, veuillez recommencer la saisie "); new_line;  
+                  end;
+         end loop;
 
 
       elsif(tmp2.Adherent.Typecontrat=Fitness and
@@ -177,8 +204,21 @@ loop
         
          New_Line;
          New_Line;
-         Get(Choixact);
-         Skip_Line;
+         loop
+         begin
+         Get(Choixact);skip_line;
+         exit when choixact=2;
+         new_line;
+         put("Saisir un chiffre proposé");
+         new_line;
+            exception
+                     when data_error=>skip_line;
+                     put("Erreur, veuillez recommencer la saisie "); new_line;
+                     when constraint_error=>skip_line;
+                     put("Erreur, veuillez recommencer la saisie "); new_line;  
+                  end;
+         end loop;
+
       else
          Put("Pas de creneau disponible à cet horaire");
       end if;
@@ -246,10 +286,25 @@ for I in 1..ChoixAdh-1 loop
                New_Line;
                New_Line;
               
+               put("Saisir le numéro du jour : ");
+               loop
+                  begin
+                  Get(Choixjour);
+                  Skip_Line;
+                  exit when choixjour=1 or choixjour=2 or choixjour=3
+                  or choixjour=4 or choixjour=5 or Choixhoraire=6;
+                  new_line;
+                  put("Veuillez sélectionner le numéro d'un jour valide ");
+                  new_line;
+                  exception
+                     when data_error=>skip_line;
+                     put("Erreur, veuillez recommencer la saisie "); new_line;
+                     when constraint_error=>skip_line;
+                     put("Erreur, veuillez recommencer la saisie "); new_line;  
+                  end;                
+               end loop;
 
 
-               Get(Choixjour);
-               Skip_Line;
                      
                      
                      
@@ -282,8 +337,19 @@ for I in 1..ChoixAdh-1 loop
                         
                         
                         New_Line;
-                        Get(Choixhoraire);
-                        Skip_Line;
+                     loop
+                        begin
+                           Get(Choixhoraire);
+                           Skip_Line;
+                           exit when Choixhoraire=1 or Choixhoraire=2 or Choixhoraire=3
+                           or Choixhoraire=4 or Choixhoraire=5 or Choixhoraire=6;
+                           new_line;
+                           put("Sélectionnez un chiffre valable pour le créneau"); new_line;
+                           exception
+                              when data_error=>skip_line;put("Erreur, veuillez recommencer la saisie "); new_line;
+                              when constraint_error=>skip_line;put("Erreur, veuillez recommencer la saisie "); new_line;
+                        end;
+                     end loop;
 
             if ((Choix_Sem =1 and Tmp3.Adherent.Planingsemaine1(Choixjour)(Choixhoraire).Present = False) or
                 (Choix_Sem =2 and Tmp3.Adherent.Planingsemaine2(Choixjour)(Choixhoraire).Present = False))Then 
@@ -336,32 +402,6 @@ for I in 1..ChoixAdh-1 loop
 end Choix_Jour;
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
    procedure Reservation_Creneau (
       Tete : in out Gestion_Pile.T_Pteurpileadherents;
       P1:in out Declaration_Adherent.T_Planning_General;
@@ -375,7 +415,7 @@ end Choix_Jour;
       Choixhoraire,
       Choixadh     : Integer                           := 0;
       Etape_Suiv   : Boolean                           := False;
-      Adherent     : T_Adherent;
+      -- Adherent     : T_Adherent;
                 
    begin
 
@@ -394,8 +434,22 @@ end Choix_Jour;
             Tmp:=Tmp.Suiv;
          end loop;
 
-         Get(Choixadh);
-         Skip_Line;
+         new_line;
+         put ("Entrer le numéro de l'adhérent : ");
+         loop
+            begin
+               Get(Choixadh);
+               Skip_Line; 
+               exit when Choixadh>=1 and Choixadh<=J;
+               new_line;
+               put("Veuillez saisir un chiffre dans l'intervale");
+               new_line;
+               exception
+                  when data_error=>skip_line;put("Erreur saisie, veuillez reccomencer");new_line;
+                  when constraint_error=>skip_line;put("Erreur saisie, veuillez reccomencer");new_line;
+            end;
+         end loop;
+
       else
          NEW_line;new_line;Put("pas d'adherents");
          Etape_Suiv:=False;
@@ -415,13 +469,28 @@ end Choix_Jour;
             Put("1=> Semaine actuelle");NEW_line;
             Put("2=> Semaine suivante");new_line;
             Put("3=> Quitter");NEW_line;new_line;
-            Get(Choix_Sem);skip_line;           
+            
+         loop
+         begin
+         Get(Choix_Sem);skip_line;
+         exit when choix_sem=1 or choix_sem=2 or choix_sem=3;
+         new_line;
+         put("Saisir un chiffre proposé");
+         new_line;
+            exception
+                     when data_error=>skip_line;
+                     put("Erreur, veuillez recommencer la saisie "); new_line;
+                     when constraint_error=>skip_line;
+                     put("Erreur, veuillez recommencer la saisie "); new_line;  
+                  end;
+         end loop;           
             case Choix_Sem is 
                when 1=>
                   Choix_Jour(P1,Choix_Sem,ChoixAdh,tete);exit;
                when 2=>
                   Choix_Jour(P2,Choix_Sem,ChoixAdh,tete);exit;
-               when Others=> null;
+               when 3 => exit;
+               when Others=> put_line("Erreur, veuillez recommencer la saisie");new_line;
             end case;
          end loop;
 
