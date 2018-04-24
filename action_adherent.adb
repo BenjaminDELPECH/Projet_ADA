@@ -1,73 +1,61 @@
-with Ada.Text_Io;
-use Ada.Text_Io;
+with Ada.Text_Io,dates,abr_adher,Gestion_Pile;
+use Ada.Text_Io,dates,abr_adher,Gestion_Pile;
 
 package body Action_Adherent is
 
-procedure Supprimmer_Adherent(Tete: in out Gestion_Pile.T_Pteurpileadherents;P1:in out T_planning_general;P2:in out T_planning_general)is
-     Etape_Suiv:boolean;
-      Tmp7,Tete2: Gestion_Pile.T_Pteurpileadherents := Tete;
-      J:Integer:=0;
-         nomAdhe,prenomAdhe:declaration_adherent.mot;
-      Choixadh,Choixjour,Choixhoraire,Choixannuler:Integer;
-      P:T_Planning_General:=P2;activite:T_activite;
-Arbre_de_vie:abr_adher.T_Arbre_adh;
-adherent_vide:T_Adherent;
-
+Procedure traite_max (Arrrrr : in out abr_adher.T_Arbre_adh ;
+ max : out gestion_pile.T_PteurPileAdherents) is
 begin
-
-if tete /= null then
-         Etape_Suiv:=True;
-
-         while Tmp7 /= null loop
-            J:=J+1;
-            Put(J);
-            Put("=>"); 
-            put(tmp7.adherent.nom(1));
-            put(tmp7.adherent.prenom(1));
-            nomAdhe:=tmp7.adherent.nom;
-            prenomAdhe:=tmp7.adherent.prenom;
-            if abr_adher.homonyme(Arbre_de_vie,nomAdhe,prenomAdhe) then
-            put("(");
-            put(tmp7.adherent.datenaissance.annee mod 100, width=>0);
-            put(")");
-            end if;
-            tmp7:=Tmp7.suiv;
-            New_Line;
-         end loop;
-         put("Saisir le numéro de l'adhérent : ");
-         loop
-             begin
-                 Get(Choixadh);
-                 Skip_Line;
-                 exit when choixadh <= J and choixadh>=1;
-                 new_line;
-                 put("Veuillez saisir un chiffre dans l'intervalle");
-                 new_line;
-             exception
-                 when data_error=>skip_line;put("Erreur saisie, recommencer "); new_line;
-                 when constraint_error=> skip_line;put("Erreur saisie, recommencer "); new_line;
-             end;
-         end loop;
+   if Arrrrr/=null then
+      if Arrrrr.fd=null then
+      traite_max(Arrrrr.fg,max);
       else
-         NEW_line;new_line;Put("pas d'adherents");
-         Etape_Suiv:=False;
+      max:=Arrrrr.PteurCelluleAdh;
       end if;
-      
-       for I in 1..Choixadh-2 loop
-          --on arrive à ladherent precedent
-          Tmp7:=Tmp7.Suiv;
-          --tmp7.suiv et la celulle qu'on veut supprimmer
-          
-          --on passe le pointeur à ladhereur après celui quon veut supprimmer
-          tmp7.suiv:=Tmp7.suiv.suiv;
-       
-       end loop;
-       Put("Adherent supprimmé");
+   end if;
+end traite_max;
 
+procedure Supprimmer_Adherent_pile(infos : declaration_adherent.T_Adherent; 
+   Pteur: in out Gestion_Pile.T_Pteurpileadherents) is
+   CopiePteur,avantPteur: Gestion_Pile.T_Pteurpileadherents:=Pteur;
+begin
+   while CopiePteur /= null loop
+      if CopiePteur.adherent.nom = infos.nom and then
+      CopiePteur.adherent.prenom=infos.prenom and then
+      CopiePteur.adherent.datenaissance=infos.datenaissance then
+      avantPteur.suiv:=CopiePteur.suiv;
+      exit;
+      else
+      avantPteur:=CopiePteur;
+      CopiePteur:=CopiePteur.suiv;
+      end if;
+   end loop;
+end Supprimmer_adherent_pile;
 
+Procedure supprimer_adherent_arbre(infos : declaration_adherent.T_adherent ; Arbreeeee : in out abr_adher.T_Arbre_adh) is
+begin
+   if Arbreeeee /= null then
+      if Arbreeeee.PteurCelluleAdh.adherent.nom < infos.nom or 
+      (Arbreeeee.PteurCelluleAdh.adherent.nom = infos.nom and then Arbreeeee.PteurCelluleAdh.adherent.prenom < infos.prenom) then
+         Supprimer_adherent_arbre(infos,Arbreeeee.fd);
+      elsif Arbreeeee.PteurCelluleAdh.adherent.nom > infos.nom or 
+      (Arbreeeee.PteurCelluleAdh.adherent.nom = infos.nom and then Arbreeeee.PteurCelluleAdh.adherent.prenom > infos.prenom) then
+         Supprimer_adherent_arbre(infos,Arbreeeee.fg);
+      else if Arbreeeee.PteurCelluleAdh.adherent.DateNaissance /= infos.datenaissance then
+         supprimer_adherent_arbre(infos,Arbreeeee.fg);
+         else
+            if Arbreeeee.fg=null then
+               Arbreeeee:=Arbreeeee.fd;
+            elsif Arbreeeee.fd=null then
+               Arbreeeee:=Arbreeeee.fg;
+            -- else traite_max(Arbreeeee.fg,Arbreeeee.PteurCelluleAdh);
+            end if;
+         end if;
+      end if;
+   end if;
 
+end supprimer_adherent_arbre;
 
-end Supprimmer_adherent;
 
 
 procedure Supprimmer_creneau (
