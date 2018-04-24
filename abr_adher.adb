@@ -67,12 +67,55 @@ end initialisation_ABR;
    Procedure Affichage_ABR ( A : T_Arbre_adh) is
    begin
       if A/=null then
+         Affichage_ABR(A.Fg);
          put(A.PteurCelluleAdh.Adherent.Nom);
          put(A.PteurCelluleAdh.Adherent.prenom);
          new_line;
-         Affichage_ABR(A.Fg);
          Affichage_ABR(A.Fd);
       end if;
    end Affichage_ABR;
+
+function homonyme (Arrrrr : T_Arbre_adh ; 
+   nomAdherent,prenomAdherent : declaration_adherent.mot) return boolean is
+nb : integer;
+
+function nb_meme_nom (Arrr : T_Arbre_adh ; 
+   nomAdherent,prenomAdherent : declaration_adherent.mot) return integer is
+begin
+   if Arrr=null then return 0;
+   elsif Arrr.PteurCelluleAdh.adherent.nom=nomAdherent and then Arrr.PteurCelluleAdh.adherent.prenom=prenomAdherent then 
+      return (1+nb_meme_nom(Arrr.fg,nomAdherent,prenomAdherent)+nb_meme_nom(Arrr.fd,nomAdherent,prenomAdherent));
+   else return (nb_meme_nom(Arrr.fg,nomAdherent,prenomAdherent)+nb_meme_nom(Arrr.fd,nomAdherent,prenomAdherent));
+   end if;
+end nb_meme_nom;
+
+begin
+   nb:=nb_meme_nom(Arrrrr,nomAdherent,prenomAdherent);
+   if nb >1 then return true;
+   else return false;
+   end if;
+end homonyme;
+
+
+Procedure Affichage_Pile (Pteur : gestion_pile.T_PteurPileAdherents ; Arbre_de_vie : T_Arbre_adh) is
+nomAdhe,prenomAdhe:declaration_adherent.mot;
+begin
+   if pteur /= null then
+      put ("=> ");
+      put(Pteur.adherent.nom);
+      put(Pteur.adherent.prenom);
+      put(Pteur.adherent.nom(1));
+      put(Pteur.adherent.prenom(1));
+      nomAdhe :=Pteur.adherent.nom;
+      prenomAdhe:=Pteur.adherent.prenom;
+      if homonyme(Arbre_de_vie,nomAdhe,prenomAdhe) then
+      put("(");
+      put(Pteur.adherent.datenaissance.annee mod 100, width=>0);
+      put(")");
+      end if;
+      new_line;
+      Affichage_Pile(pteur.suiv,Arbre_de_vie);
+   end if;
+end Affichage_Pile;
 
 end ABR_adher;

@@ -28,10 +28,6 @@ begin
        end loop;
 end Affichage_Semaine_gen;
 
-
-
-
-
    procedure affichage_global(P1:in out T_planning_general;P2:in out T_planning_general)is
       Choix_Sem:Integer;
       
@@ -43,11 +39,22 @@ end Affichage_Semaine_gen;
      Put_line("1=>Afficher planning semaine actuelle");new_line;new_line;
       Put_line("2=>Afficher planning semaine suivante");new_line;new_line;
    Put_line("3=>Quitter");new_line;
-   Get(Choix_Sem);skip_line;new_line;
+   put("Saisir le chiffre correspondant à votre choix : ");
+    loop
+    begin
+    Get(Choix_Sem);skip_line;new_line;
+    exit when choix_sem=1 or choix_sem=2 or choix_sem=3;
+    put("Veuillez saisir un chiffre valide");
+    exception
+      when data_error=>skip_line;put("Erreur, recommencez la saisie");new_line;
+      when constraint_error=>skip_line;put("Erreur, recommencez la saisie"); new_line;
+    end ;
+    end loop;
       case Choix_Sem is
          when 1=>Affichage_Semaine_Gen(P1);
           when 2=>Affichage_Semaine_Gen(P2);
-         when others=> Put("erreur, veillez reessayer");
+          when 3=> null;
+         when others=> null;
       end case;
    end Affichage_global;
 
@@ -61,9 +68,12 @@ end Affichage_Semaine_gen;
    -- end Affichage_Semaine_adh;
 
 
-procedure affichage_plan_adh (tete : in out Gestion_Pile.T_Pteurpileadherents)is
+procedure affichage_plan_adh (tete : in out Gestion_Pile.T_Pteurpileadherents;
+  Arbre_de_vie:abr_adher.T_Arbre_adh)is
       
-    tmp2,tmp:   Gestion_Pile.T_Pteurpileadherents :=tete;ChoixAdh,J:integer:=0;etape_suiv:boolean:=False;
+    tmp2,tmp:   Gestion_Pile.T_Pteurpileadherents :=tete;
+    ChoixAdh,J:integer:=0;etape_suiv:boolean:=False;
+    nomAdhe,prenomAdhe:declaration_adherent.mot;
    -- test: T_Planning_Adh;
    begin
       
@@ -75,14 +85,33 @@ procedure affichage_plan_adh (tete : in out Gestion_Pile.T_Pteurpileadherents)is
          while Tmp2 /= null loop
             J:=J+1;
             Put(J);
-            Put("=>"); pUT(tmp2.adherent.nom);           
+            Put("=>"); 
+            put(tmp2.adherent.nom(1));
+            put(tmp2.adherent.prenom(1));
+            nomAdhe:=tmp2.adherent.nom;
+            prenomAdhe:=tmp2.adherent.prenom;
+            if abr_adher.homonyme(Arbre_de_vie,nomAdhe,prenomAdhe) then
+            put("(");
+            put(tmp2.adherent.datenaissance.annee mod 100, width=>0);
+            put(")");
+            end if;
             tmp2:=Tmp2.suiv;
             New_Line;
-          
          end loop;
-
-         Get(Choixadh);
-         Skip_Line;
+         put("Saisir le numéro de l'adhérent : ");
+         loop
+             begin
+                 Get(Choixadh);
+                 Skip_Line;
+                 exit when choixadh <= J and choixadh>=1;
+                 new_line;
+                 put("Veuillez saisir un chiffre dans l'intervalle");
+                 new_line;
+             exception
+                 when data_error=>skip_line;put("Erreur saisie, recommencer "); new_line;
+                 when constraint_error=> skip_line;put("Erreur saisie, recommencer "); new_line;
+             end;
+         end loop;
       else
          NEW_line;new_line;Put("pas d'adherents");
          Etape_Suiv:=False;
@@ -118,30 +147,13 @@ procedure affichage_plan_adh (tete : in out Gestion_Pile.T_Pteurpileadherents)is
               Put(K);Put(":");
                if Tmp.Adherent.Planingsemaine2(T_Semaine'Pos(J)+1)(K).Present = True then   
                  Put(T_Activite'Image(Tmp.Adherent.Planingsemaine2(T_Semaine'Pos(J)+1)(K).Activite));
-                
                else Put("      ");
-               end if;
-
-                           
-                          
+               end if;            
               end loop;
      new_line;new_line;
      end loop;
-
-
-      
-      
-      
-      
       end if;
 
-        
-    
    end Affichage_plan_adh;
-
-
-
-
-
 
 end Affichage;

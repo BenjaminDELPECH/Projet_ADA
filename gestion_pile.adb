@@ -53,7 +53,8 @@ PROCEDURE Saisie_activite (acti : out declaration_adherent.T_Contrat) is
       END LOOP;
    END Saisie_activite;
 
-Procedure deja_inscrit (infos : declaration_adherent.T_Adherent ; Pteur : T_PteurPileAdherents ; 
+Procedure deja_inscrit (infos : declaration_adherent.T_Adherent ; 
+	Pteur : T_PteurPileAdherents ; 
 	inscrit : out boolean ; meme_contrat : out boolean) is
 begin
 	if Pteur = null then inscrit := false ; meme_contrat := false;
@@ -76,7 +77,8 @@ Procedure modification_contrat (infos : declaration_adherent.T_Adherent ;
 	Pteur : in out T_PteurPileAdherents) is
 begin
 	if Pteur /= null then
-		if Pteur.adherent.nom=infos.nom and then Pteur.adherent.prenom=infos.prenom then
+		if Pteur.adherent.nom=infos.nom and then 
+		Pteur.adherent.prenom=infos.prenom then
 		Pteur.adherent.Typecontrat:=infos.Typecontrat;
 		else modification_contrat(infos,Pteur.suiv);
 		end if;
@@ -118,14 +120,11 @@ begin
 	InfoAdherent.TypeContrat:=Act;
 	InfoAdherent.DateDerniereAdhesion:=dates.date_jour;
 	deja_inscrit(InfoAdherent,Pteur,present_pile,contrat_identique);
-	if not present_pile then  -- vérification que l'inscrit n'est pas déjà présent dans la pile
+	if not present_pile then  
+	-- vérification que l'inscrit n'est pas déjà présent dans la pile
 		Pteur := new T_CelluleAdherents'(InfoAdherent,Pteur);
 		new_line;
 		put ("Enregistrement effectué");
-		new_line;
-		put ("Appuyez sur entrer pour retourner au menu principal");
-		new_line;
-		skip_line;
 	else 
 		new_line;
 		put("Personne déjà inscrite");
@@ -140,17 +139,10 @@ begin
 				when 'o'|'O'=>
 					put("Modification du contrat ");
 					modification_contrat(InfoAdherent,Pteur);
-					new_line;
-					put ("Appuyez sur entrer pour retourner au menu principal");
-					new_line;
-					skip_line;
 					exit;
 				when 'n'|'N'=>
 					put("Contrat non modifié");
 					new_line;
-					put ("Appuyez sur entrer pour retourner au menu principal");
-					new_line;
-					skip_line;
 					exit;
 				when others => put ("Erreur dans la saisie, recommencer");
 					new_line;
@@ -186,17 +178,6 @@ begin
 	else trouve:=false;
 	end if;
 end Affichage_info_adh_pile;
-
-Procedure Affichage_Pile (Pteur : T_PteurPileAdherents) is
-begin
-	if pteur /= null then
-		put ("=> ");
-		put(Pteur.adherent.prenom);
-		put(Pteur.adherent.nom);
-		new_line;
-		Affichage_Pile(pteur.suiv);
-	end if;
-end Affichage_Pile;
 
 Procedure saisie_nom_prenom (nomAdh,prenomAdh: out declaration_adherent.mot) is
 begin
