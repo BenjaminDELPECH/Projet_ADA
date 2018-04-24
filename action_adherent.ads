@@ -7,8 +7,16 @@ package action_Adherent is
    
 
 Tete:gestion_pile.T_Pteurpileadherents;
- procedure Reservation_Creneau(Tete:gestion_pile.T_Pteurpileadherents);
+   procedure Reservation_Creneau (
+      Tete : in out Gestion_Pile.T_Pteurpileadherents;
+      P1:in out Declaration_Adherent.T_Planning_General;
+      P2:in out Declaration_Adherent.T_Planning_General
+);
     
+procedure Choix_Jour(P:in out Declaration_Adherent.T_Planning_General;Choix_Sem:integer;ChoixAdh:integer; Tete : in out Gestion_Pile.T_Pteurpileadherents
+      );
+
+
       
 
 end action_adherent;
