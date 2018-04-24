@@ -245,13 +245,10 @@ end Annuler_Creneau;
       Act_Choose : T_Activite;
 
    begin
-      
 
       for I in 1..Choix_Adh-1 loop
          Tmp:= Tmp.Suiv;
       end loop;
-
-
 
       
       --Verification
@@ -311,10 +308,7 @@ if Choix_act = 2 then
            If Verif = True Then
            For M in P(Cj)(Ch).Fitness.Tabinscrit'range loop
                if P(Cj)(Ch).Fitness.Tabinscrit(M).DateNaissance.Annee = 1 then
-                  
-                  P(Cj)(Ch).Fitness.Tabinscrit(M) := Tmp.Adherent;
-                  
-                  
+                  P(Cj)(Ch).Fitness.Tabinscrit(M) := Tmp.Adherent;                  
                    P(Cj)(Ch).Fitness.Taille :=P(Cj)(Ch).Aqua.Taille+1;
                   EXIT;
                end if;
@@ -322,10 +316,6 @@ if Choix_act = 2 then
       end if;
       end if;
 
-
-
-
-      
       if Verif = True then
 
          --modif planning adherent semaine 1
@@ -408,13 +398,14 @@ loop
          Cren.Aqua.Tabinscrit(N).Datenaissance.Annee=1 
          and Cren.Aqua.Taille < N)then
          Put_Line("1 pour Reserver Aqua");
+         put_line("3 pour retourner au menu");
         
          New_Line;
          New_Line;
          loop
          begin
          Get(Choixact);skip_line;
-         exit when choixact=1;
+         exit when choixact=1 or choixact=3;
          new_line;
          put("Saisir un chiffre proposé");
          new_line;
@@ -425,18 +416,19 @@ loop
                      put("Erreur, veuillez recommencer la saisie "); new_line;  
                   end;
          end loop;
-
+         exit when choixact=3;
 
       elsif(tmp2.Adherent.Typecontrat=Fitness and
          Cren.Fitness.Open = False and Cren.Fitness.Tabinscrit(N).Datenaissance.Annee=1 and Cren.Fitness.Taille < N) then
          Put_line("2 pour Reserver Fitness");
+         put_line("3 pour retourner au menu");
         
          New_Line;
          New_Line;
          loop
          begin
          Get(Choixact);skip_line;
-         exit when choixact=2;
+         exit when choixact=2 or choixact=3;
          new_line;
          put("Saisir un chiffre proposé");
          new_line;
@@ -447,6 +439,8 @@ loop
                      put("Erreur, veuillez recommencer la saisie "); new_line;  
                   end;
          end loop;
+
+         exit when Choixact=3;
 
       else
          Put("Pas de creneau disponible à cet horaire");
