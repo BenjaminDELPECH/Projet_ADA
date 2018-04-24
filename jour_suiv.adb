@@ -1,20 +1,13 @@
-With ada.text_io, ada.integer_text_io;
-Use ada.text_io, ada.integer_text_io;
+With ada.text_io, ada.integer_text_io, gestion_pile,dates,abr_adher;
+Use ada.text_io, ada.integer_text_io, gestion_pile,dates,abr_adher;
 
 package body jour_suiv is  
 
 procedure Passer_Jour_Suivant(D:in out dates.T_Date;J:in out T_Semaine)is
-  
-   
 begin
-   D:=dates.Date_Jour;     J:=Jour_act;
+   D:=dates.Date_Jour;
 --on passe au jour suivant
    D.Jour:=D.Jour+1;    
-   
-case J is when Dimanche => 
-         J:=lundi;
-      when others=>   J:=T_Semaine'Succ(J);
- end case;
    
 --on gere tout les cas ou il faut changer le mois ou l'année
    
@@ -40,6 +33,8 @@ case J is when Dimanche =>
    --on gere jour de la semaine et changement de planning
    case J is 
       when Dimanche =>
+      J:=lundi;
+
       --On archive le planning actuel
       fichiers.Archive_planning_act(fichiers.Archive_plan,Declaration_Adherent.Plan_Act);
       --on fait passer le planning suiv en plannint actuel
@@ -47,15 +42,71 @@ case J is when Dimanche =>
       
       --On Genere Un Nouveau Planning Suiv, qui sera vide.
          Declaration_Adherent.Plan_Suiv:=Declaration_Adherent.Plan_Vide;
-      
-         
-      
-      
-      when others=> null;
+      when others=>   J:=T_Semaine'Succ(J);
       end case;
-
-   
    end Passer_Jour_Suivant;
+
+Procedure modification_date_adhesion (infos : declaration_adherent.T_Adherent ; 
+   PteurAdherent : in out gestion_pile.T_PteurPileAdherents) is
+begin
+   if PteurAdherent /= null then
+      if PteurAdherent.adherent.nom=infos.nom and then 
+      PteurAdherent.adherent.prenom=infos.prenom and then
+      PteurAdherent.adherent.DateNaissance=infos.datenaissance then
+      PteurAdherent.adherent.datederniereadhesion:=infos.datederniereadhesion;
+      else modification_date_adhesion(infos,PteurAdherent.suiv);
+      end if;
+   end if;
+end modification_date_adhesion;
+
+Procedure Renouvellement_Adherent (Arbre_de_vie : in out abr_adher.T_Arbre_adh ; D : dates.T_Date ; 
+   Pteur : in out gestion_pile.T_PteurPileAdherents ; 
+   planing_general_1 : in out declaration_adherent.T_planning_general;
+   planing_general_2:in out declaration_adherent.T_planning_general) is
+   infos_Adherent : declaration_adherent.T_Adherent;
+   choix:character;
+begin
+   if Arbre_de_vie/=null then
+      if Arbre_de_vie.PteurCelluleAdh.adherent.datederniereadhesion.annee+1=d.annee and then
+      Arbre_de_vie.PteurCelluleAdh.adherent.datederniereadhesion.mois=d.mois and then 
+      Arbre_de_vie.PteurCelluleAdh.adherent.datederniereadhesion.jour=d.jour then
+      put(Arbre_de_vie.PteurCelluleAdh.adherent.nom(1));
+      put(Arbre_de_vie.PteurCelluleAdh.adherent.prenom(1));
+      infos_adherent.nom:=Arbre_de_vie.PteurCelluleAdh.adherent.nom;
+      infos_adherent.prenom:=Arbre_de_vie.PteurCelluleAdh.adherent.prenom;
+      infos_adherent.datenaissance:=Arbre_de_vie.PteurCelluleAdh.adherent.datenaissance;
+      infos_adherent.datederniereadhesion:=D;
+      if abr_adher.homonyme(Arbre_de_vie,infos_adherent.nom,infos_adherent.prenom) then
+         put("(");
+         put(Arbre_de_vie.PteurCelluleAdh.adherent.datenaissance.annee mod 100, width=>0);
+         put(")");
+      end if;
+      put(" a besoin de renouveler son adhésion, souhaitez-vous mettre à jour son adhésion ? (o/n) ");
+      get(choix);skip_line;
+      loop
+       case choix is
+          when 'o'|'O'=>
+            new_line;
+            put("Renouvellement de l'adhésion, la nouvelle date de derniere adhesion est : ");
+            modification_date_adhesion(infos_adherent,Pteur);
+            dates.affichage_date(Arbre_de_vie.PteurCelluleAdh.adherent.datederniereadhesion);
+            new_line;
+            exit;
+          when 'n'|'N'=>
+            new_line;
+            put("L'adhérent est maintenant supprimé");
+            new_line;
+            action_adherent.Supprimmer_Adherent(Pteur,planing_general_1,planing_general_2);
+            exit;
+          when others => put("Erreur,recommencez la saisie"); new_line;
+       end case;
+      end loop;
+      end if;
+      Renouvellement_Adherent(Arbre_de_vie.fg,D,Pteur,planing_general_1,planing_general_2);
+      Renouvellement_Adherent(Arbre_de_vie.fd,D,Pteur,planing_general_1,planing_general_2);
+   end if;
+   end Renouvellement_Adherent;
+
 
    
 
