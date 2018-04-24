@@ -60,9 +60,7 @@ begin
 end modification_date_adhesion;
 
 Procedure Renouvellement_Adherent (Arbre_de_vie : in out abr_adher.T_Arbre_adh ; D : dates.T_Date ; 
-   Pteur : in out gestion_pile.T_PteurPileAdherents ; 
-   planing_general_1 : in out declaration_adherent.T_planning_general;
-   planing_general_2:in out declaration_adherent.T_planning_general) is
+   Pteur : in out gestion_pile.T_PteurPileAdherents) is
    infos_Adherent : declaration_adherent.T_Adherent;
    choix:character;
 begin
@@ -87,23 +85,24 @@ begin
        case choix is
           when 'o'|'O'=>
             new_line;
-            put("Renouvellement de l'adhésion, la nouvelle date de derniere adhesion est : ");
+            put("Renouvellement de l'adhesion, la nouvelle date de derniere adhesion est : ");
             modification_date_adhesion(infos_adherent,Pteur);
             dates.affichage_date(Arbre_de_vie.PteurCelluleAdh.adherent.datederniereadhesion);
             new_line;
             exit;
           when 'n'|'N'=>
             new_line;
-            put("L'adhérent est maintenant supprimé");
+            put("L'adherent est maintenant supprime");
             new_line;
-            action_adherent.Supprimmer_Adherent(Pteur,planing_general_1,planing_general_2);
+            action_adherent.Supprimmer_Adherent_Pile(infos_adherent,Pteur);
+            action_adherent.supprimer_adherent_arbre(infos_adherent,Arbre_de_vie);
             exit;
           when others => put("Erreur,recommencez la saisie"); new_line;
        end case;
       end loop;
       end if;
-      Renouvellement_Adherent(Arbre_de_vie.fg,D,Pteur,planing_general_1,planing_general_2);
-      Renouvellement_Adherent(Arbre_de_vie.fd,D,Pteur,planing_general_1,planing_general_2);
+      Renouvellement_Adherent(Arbre_de_vie.fg,D,Pteur);
+      Renouvellement_Adherent(Arbre_de_vie.fd,D,Pteur);
    end if;
    end Renouvellement_Adherent;
 

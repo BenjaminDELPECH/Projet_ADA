@@ -94,8 +94,7 @@ begin
             	put ("Date passée au jour suivant, il est maintenant le : ");
             	affichage_date(date_jour);
             	new_line;
-              Renouvellement_Adherent(Arbre,date_jour,PteurPileA,P1,P2);
-              Initialisation_ABR(PteurPileA,Arbre);
+              Renouvellement_Adherent(Arbre,date_jour,PteurPileA);
             	Retour_Menu_Principal;
             	exit;
             when '6'=>
