@@ -114,11 +114,6 @@ package body donnee is
                           P1(1)(4).Fitness.Tabinscrit(2):=Tab(6);
       --Semaine 2 
       --Aqua
-      Tab(6).Planingsemaine2(1)(3).Present:= True ;
-      Tab(6).Planingsemaine2(1)(3).Activite := Declaration_Adherent.T_Activite'Val(0);
-                          P2(1)(3).Aqua.Tabinscrit(3):=Tab(6);     
-     
- 
 
       
       Tab(7).Nom := "Vandim              ";
