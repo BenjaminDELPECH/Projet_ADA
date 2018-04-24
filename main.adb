@@ -3,7 +3,6 @@ declaration_adherent,menu_principal,abr_adher,donnee,action_adherent;
 use Ada.Text_Io,Ada.Integer_Text_Io,dates,gestion_pile,affichage,
 declaration_adherent,menu_principal,abr_adher,donnee,action_adherent;
 
-
 procedure Main is 
 
 	PteurPileA : T_PteurPileAdherents;
@@ -33,7 +32,7 @@ begin
 							exit;
 						when '2'=>
 							Put_Line("*** Chercher un adherent***");
-							Affichage_Pile(PteurPileA);
+							abr_adher.Affichage_Pile(PteurPileA,Arbre);
 							gestion_pile.saisie_nom_prenom
 							(nomadherent,prenomadherent);
 							gestion_pile.Affichage_info_adh_pile 
@@ -82,7 +81,7 @@ begin
             	Put_Line("*** Affichage planning d'un adherent ***");
             	New_Line;
               	-- procedure affichage general
-                 affichage_plan_adh(PteurPileA);            
+                 affichage_plan_adh(PteurPileA,Arbre);            
 				Retour_Menu_Principal;
             	exit;
 

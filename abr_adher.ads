@@ -20,5 +20,9 @@ Procedure initialisation_ABR (Pteur:gestion_pile.T_PteurPileAdherents ;
 
    Procedure affich_Prefixe_ABR (A : IN T_Arbre_adh);
    Procedure Affichage_ABR ( A : T_Arbre_adh);
+   function homonyme (Arrrrr : T_Arbre_adh ; 
+   nomAdherent,prenomAdherent : declaration_adherent.mot) return boolean;
+Procedure Affichage_Pile (Pteur : gestion_pile.T_PteurPileAdherents ; 
+   Arbre_de_vie : T_Arbre_adh);
       
 end abr_adher;
