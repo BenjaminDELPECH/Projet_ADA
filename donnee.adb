@@ -3,7 +3,7 @@ use Ada.Text_IO, Ada.Integer_Text_IO;
    
 package body donnee is
 
-   procedure Initialisation_donnees ( Tab: OUT declaration_adherent.T_Tabadherents;P:IN OUT T_Planning_general  ) is
+   procedure Initialisation_donnees ( Tab: OUT declaration_adherent.T_Tabadherents;P1:IN OUT declaration_adherent.T_Planning_general;P2:in OUT declaration_adherent.T_Planning_general  ) is
      Begin 
       tab(0).Nom:="Ermont              "; --others
       Tab(0).Prenom := "Luc                 ";

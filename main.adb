@@ -15,7 +15,7 @@ procedure Main is
 	informations_init_adherents : declaration_adherent.T_Tabadherents(0..9);
        P1,P2:T_Planning_general;
 begin
-	donnee.initialisation_donnees(informations_init_adherents);
+	donnee.initialisation_donnees(informations_init_adherents,P1,P2);
 	Ajout_Dans_Pile(informations_init_adherents,PteurPileA);
 	initialisation_ABR(PteurPileA,Arbre);
 	while sortie=false loop
