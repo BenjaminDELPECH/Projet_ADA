@@ -3,6 +3,187 @@ use Ada.Text_Io;
 
 package body Action_Adherent is
 
+
+ procedure Supprimmer_creneau (
+         P: in out T_Planning_general;
+         activite:T_Activite;
+         Cj        : in     Integer;
+         Ch        : in     Integer;
+         
+         Choix_Adh : in     Integer;
+       Tete       : in out       Gestion_Pile.T_Pteurpileadherents)is
+          
+    Tmp6: Gestion_Pile.T_Pteurpileadherents := Tete;
+    adherent_vide:T_Adherent;
+
+ begin
+    for I in 1..Choix_adh-1 loop
+          Tmp6:=Tmp6.Suiv;
+    end loop;
+    Tmp6.Adherent.Planingsemaine2(Cj)(Ch).Present:=False;
+  If activite = Aqua then
+    For i in  P(Cj)(Ch).Aqua.Tabinscrit'range loop
+       if P(Cj)(Ch).Aqua.Tabinscrit(I).Nom = tmp6.Adherent.Nom
+                  and P(Cj)(Ch).Aqua.Tabinscrit(I).Prenom = tmp6.Adherent.Prenom 
+                  and  P(Cj)(Ch).Aqua.Tabinscrit(I).Datenaissance.Annee = tmp6.Adherent.Datenaissance.Annee
+                and  P(Cj)(Ch).Aqua.Tabinscrit(I).Datenaissance.Mois = Tmp6.Adherent.Datenaissance.Mois then
+             P(Cj)(Ch).Aqua.Tabinscrit(I) := Adherent_Vide;
+             P(Cj)(Ch).Aqua.Taille :=P(Cj)(Ch).Aqua.Taille-1;
+             tmp6.adherent.planingSemaine2(Cj)(Ch).Present := False;
+       end if;         
+    end loop;
+ end if;
+
+end Supprimmer_creneau;
+
+
+
+
+
+
+   procedure Annuler_Creneau(Tete:Gestion_Pile.T_Pteurpileadherents;Arbre_de_vie:abr_adher.T_Arbre_adh;P2:T_Planning_General)is
+   Etape_Suiv:boolean;
+      Tmp4,Tmp5,Tete2: Gestion_Pile.T_Pteurpileadherents := Tete;
+      J:Integer:=0;
+         nomAdhe,prenomAdhe:declaration_adherent.mot;
+      Choixadh,Choixjour,Choixhoraire,Choixannuler:Integer;
+      P:T_Planning_General:=P2;activite:T_activite;
+   begin
+      if tete /= null then
+         Etape_Suiv:=True;
+
+         while Tmp4 /= null loop
+            J:=J+1;
+            Put(J);
+            Put("=>"); 
+            put(tmp4.adherent.nom(1));
+            put(tmp4.adherent.prenom(1));
+            nomAdhe:=tmp4.adherent.nom;
+            prenomAdhe:=tmp4.adherent.prenom;
+            if abr_adher.homonyme(Arbre_de_vie,nomAdhe,prenomAdhe) then
+            put("(");
+            put(tmp4.adherent.datenaissance.annee mod 100, width=>0);
+            put(")");
+            end if;
+            tmp4:=Tmp4.suiv;
+            New_Line;
+         end loop;
+         put("Saisir le numÃ©ro de l'adhÃ©rent : ");
+         loop
+             begin
+                 Get(Choixadh);
+                 Skip_Line;
+                 exit when choixadh <= J and choixadh>=1;
+                 new_line;
+                 put("Veuillez saisir un chiffre dans l'intervalle");
+                 new_line;
+             exception
+                 when data_error=>skip_line;put("Erreur saisie, recommencer "); new_line;
+                 when constraint_error=> skip_line;put("Erreur saisie, recommencer "); new_line;
+             end;
+         end loop;
+      else
+         NEW_line;new_line;Put("pas d'adherents");
+         Etape_Suiv:=False;
+      end if;
+      
+       for I in 1..Choixadh-1 loop
+          Tmp5:=Tmp5.Suiv;
+       end loop;
+       
+
+               --Choix Jour
+               J:=0;
+               for I in T_Semaine'range loop
+                  if T_Semaine(I) = Dimanche then
+                     exit;
+                  end if;
+                  J:=J+1;
+                  New_Line;
+                  New_Line;
+                  Put(J);
+                  Put("=>");
+                  Put(T_Semaine'Image(I));
+                  New_Line;
+
+               end loop;
+               New_Line;
+               New_Line;
+              
+               put("Saisir le numéro du jour : ");
+               loop
+                  begin
+                  Get(Choixjour);
+                  Skip_Line;
+                  exit when choixjour=1 or choixjour=2 or choixjour=3
+                  or choixjour=4 or choixjour=5 or Choixjour=6;
+                  new_line;
+                  put("Veuillez sélectionner le numéro d'un jour valide ");
+                  new_line;
+                  exception
+                     when data_error=>skip_line;
+                     put("Erreur, veuillez recommencer la saisie "); new_line;
+                     when constraint_error=>skip_line;
+                     put("Erreur, veuillez recommencer la saisie "); new_line;  
+                  end;                
+               end loop;
+
+                        Put("Saisir numero du creneau");
+                        New_Line;
+                        New_Line;
+                        Put_Line("1 => 9H-10H");
+                        New_Line;
+                        New_Line;
+                        Put_Line("2=> 10H-11H");
+                        New_Line;
+                        New_Line;
+                        Put_Line("3=> 12H30-13H30");
+                        New_Line;
+                        New_Line;
+                        Put_Line("4=> 17H30-18H30");
+                        New_Line;
+                        New_Line;
+                        Put_Line("5=> 18H30-19H30");
+                        New_Line;
+                        New_Line;
+                        Put_Line("6=> 19H30-20H30");
+                        New_Line;
+                        
+                        
+                        New_Line;
+                     loop
+                        begin
+                           Get(Choixhoraire);
+                           Skip_Line;
+                           exit when Choixhoraire=1 or Choixhoraire=2 or Choixhoraire=3
+                           or Choixhoraire=4 or Choixhoraire=5 or Choixhoraire=6;
+                           new_line;
+                           put("Sélectionnez un chiffre valable pour le créneau"); new_line;
+                           exception
+                              when data_error=>skip_line;put("Erreur, veuillez recommencer la saisie "); new_line;
+                              when constraint_error=>skip_line;put("Erreur, veuillez recommencer la saisie "); new_line;
+                        end;
+                     end loop;
+
+                     if Tmp5.Adherent.Planingsemaine2(ChoixJour)(Choixhoraire).Present = True then new_line;Put_line("Vous avez une reservation à ce creneau, SOUHAITEZ VOUS ANNULER?");
+                        new_line;
+                        Put_line("1=>OUI");
+                        Put_line("2=>NON");
+                        new_line;
+                        Get(Choixannuler);
+                     else new_line;Put_line("VOUS nAVEZ PAS DE RESERVATION A CE CRENEAU");new_line;end if;
+                     if Choixannuler = 1 then
+                       activite:=Tmp5.Adherent.Planingsemaine2(ChoixJour)(Choixhoraire).activite;
+                        Supprimmer_creneau(P,activite,Choixjour,Choixhoraire,ChoixAdh,Tete2);
+                        end if;
+
+end Annuler_Creneau;
+
+
+
+
+
+
    procedure Edit_Planning (
          P: in out T_Planning_general;
          Choixsem  : in     Integer;
@@ -294,7 +475,7 @@ for I in 1..ChoixAdh-1 loop
                   Get(Choixjour);
                   Skip_Line;
                   exit when choixjour=1 or choixjour=2 or choixjour=3
-                  or choixjour=4 or choixjour=5 or Choixhoraire=6;
+                  or choixjour=4 or choixjour=5 or Choixjour=6;
                   new_line;
                   put("Veuillez sélectionner le numéro d'un jour valide ");
                   new_line;
