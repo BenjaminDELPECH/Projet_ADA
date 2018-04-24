@@ -3,6 +3,74 @@ use Ada.Text_Io;
 
 package body Action_Adherent is
 
+   procedure Supprimmer_Adherent(Tete: in out Gestion_Pile.T_Pteurpileadherents;P1:in out T_planning_general;P2:in out T_planning_general)is
+     Etape_Suiv:boolean;
+      Tmp7,Tete2: Gestion_Pile.T_Pteurpileadherents := Tete;
+      J:Integer:=0;
+         nomAdhe,prenomAdhe:declaration_adherent.mot;
+      Choixadh,Choixjour,Choixhoraire,Choixannuler:Integer;
+      P:T_Planning_General:=P2;activite:T_activite;
+Arbre_de_vie:abr_adher.T_Arbre_adh;
+
+begin
+
+if tete /= null then
+         Etape_Suiv:=True;
+
+         while Tmp7 /= null loop
+            J:=J+1;
+            Put(J);
+            Put("=>"); 
+            put(tmp7.adherent.nom(1));
+            put(tmp7.adherent.prenom(1));
+            nomAdhe:=tmp7.adherent.nom;
+            prenomAdhe:=tmp7.adherent.prenom;
+            if abr_adher.homonyme(Arbre_de_vie,nomAdhe,prenomAdhe) then
+            put("(");
+            put(tmp7.adherent.datenaissance.annee mod 100, width=>0);
+            put(")");
+            end if;
+            tmp7:=Tmp7.suiv;
+            New_Line;
+         end loop;
+         put("Saisir le num√©ro de l'adh√©rent : ");
+         loop
+             begin
+                 Get(Choixadh);
+                 Skip_Line;
+                 exit when choixadh <= J and choixadh>=1;
+                 new_line;
+                 put("Veuillez saisir un chiffre dans l'intervalle");
+                 new_line;
+             exception
+                 when data_error=>skip_line;put("Erreur saisie, recommencer "); new_line;
+                 when constraint_error=> skip_line;put("Erreur saisie, recommencer "); new_line;
+             end;
+         end loop;
+      else
+         NEW_line;new_line;Put("pas d'adherents");
+         Etape_Suiv:=False;
+      end if;
+      
+       for I in 1..Choixadh-2 loop
+          --on arrive ‡ ladherent precedent
+          Tmp7:=Tmp7.Suiv;
+          --on passe le pointeur ‡ ladhereur aprËs celui quon veut supprimmer
+          tmp7.suiv:=Tmp7.suiv.suiv;
+       end loop;
+       Put("Adherent supprimmer");
+
+
+
+
+end Supprimmer_adherent;
+
+
+
+
+
+
+
 
  procedure Supprimmer_creneau (
          P: in out T_Planning_general;

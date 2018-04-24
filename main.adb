@@ -46,7 +46,14 @@ begin
       				abr_adher.affich_Prefixe_ABR(Arbre);
       				Retour_Menu_Principal;
              		exit;                
-            when '4'=>
+                  when '4'=>
+                     Put_Line("*** Supprimmer un adherent ***");
+      				Supprimmer_Adherent(Tete,P1,P2);
+                     Retour_Menu_Principal;
+                 when '5'=>
+Retour_Menu_Principal;
+
+
             	exit;
             when others =>
             	Put_Line("Choix inconnu, recommencer");
@@ -68,6 +75,7 @@ begin
 				Put_Line("*** Annulation des creneaux ***");
              	New_line;
             	-- procedure annulation des créneaux
+            Annuler_Creneau(PteurPileA,Arbre,P2);
 				Retour_Menu_Principal;
             	exit;
             when '3'=>
