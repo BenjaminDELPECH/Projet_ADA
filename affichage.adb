@@ -98,10 +98,11 @@ procedure affichage_plan_adh (tete : in out Gestion_Pile.T_Pteurpileadherents)is
             if T_Semaine(J) = Dimanche then exit;end if;
             Put(T_Semaine'image(J));new_line;
         For K in  Tmp.Adherent.Planingsemaine1(T_Semaine'Pos(J)+1)'range LOOP
-              Put(K);Put("=>");
+              Put(K);Put(":");
                if Tmp.Adherent.Planingsemaine1(T_Semaine'Pos(J)+1)(K).Present = True then   
                  Put(T_Activite'Image(Tmp.Adherent.Planingsemaine1(T_Semaine'Pos(J)+1)(K).Activite));
                
+               else Put("      ");
                end if;
               
                             
@@ -114,13 +115,15 @@ procedure affichage_plan_adh (tete : in out Gestion_Pile.T_Pteurpileadherents)is
             if T_Semaine(J) = Dimanche then exit;end if;
             Put(T_Semaine'image(J));new_line;
         For K in  Tmp.Adherent.Planingsemaine2(T_Semaine'Pos(J)+1)'range LOOP
-              Put(K);Put("=>");
+              Put(K);Put(":");
                if Tmp.Adherent.Planingsemaine2(T_Semaine'Pos(J)+1)(K).Present = True then   
                  Put(T_Activite'Image(Tmp.Adherent.Planingsemaine2(T_Semaine'Pos(J)+1)(K).Activite));
-               
+                
+               else Put("      ");
                end if;
-              
-                            
+
+                           
+                          
               end loop;
      new_line;new_line;
      end loop;
