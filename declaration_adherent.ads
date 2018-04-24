@@ -2,7 +2,7 @@ With dates;
 Package declaration_adherent is
 
 N : constant integer := 3;
-P : constant integer := 4;
+P,Plimit : constant integer := 4;
 
 subtype mot is string(1..20);
 
@@ -38,7 +38,7 @@ end record;
    --Creneaux generaux pour le planing general
    
     Type T_Creneau_Aqua_gen is record
-      Tabinscrit:T_Tabadherents(1..N);
+      Tabinscrit:T_Tabadherents(1..P);
       Taille:Integer:=0;
       Open:Boolean:= False;
    end record;
