@@ -2,14 +2,15 @@ package body Affichage is
 
 
 procedure Affichage_Semaine_gen (P:in out T_Planning_General)is
-      jour_num:integer;
+      -- jour_num:integer;
 begin
    
          for I in T_semaine'range loop
             if T_Semaine(I) = Dimanche then exit;end if;
            Put(T_Semaine'image(I)); 
             New_Line;
-      for J in P(T_Semaine'Pos(I))'range loop
+        -- for J in P(T_Semaine'Pos(I))'range loop
+        for J in P(1..6)'range loop
          Put(J);Put("=>");
          Put("Aqua=>");
         for K in P(T_Semaine'Pos(I)+1)(J).Aqua.Tabinscrit'range loop
@@ -48,40 +49,22 @@ end Affichage_Semaine_gen;
           when 2=>Affichage_Semaine_Gen(P2);
          when others=> Put("erreur, veillez reessayer");
       end case;
-   
-    
    end Affichage_global;
-   
 
-
-
-
-
-
-
-
-
-procedure Affichage_Semaine_adh (P:in out T_Planning_Adh)is
-   Jour_Num:Integer;
+-- procedure Affichage_Semaine_adh (P:in out T_Planning_Adh)is
+   -- Jour_Num:Integer;
   
-begin
+-- begin
    
-       Put("test");               
+       -- Put("test");               
                
-   end Affichage_Semaine_adh;
-
-
-
-
-
-
-
+   -- end Affichage_Semaine_adh;
 
 
 procedure affichage_plan_adh (tete : in out Gestion_Pile.T_Pteurpileadherents)is
       
     tmp2,tmp:   Gestion_Pile.T_Pteurpileadherents :=tete;ChoixAdh,J:integer:=0;etape_suiv:boolean:=False;
-   test: T_Planning_Adh;
+   -- test: T_Planning_Adh;
    begin
       
      Put_Line("Veillez choisir un adherent");
