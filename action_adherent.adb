@@ -100,8 +100,9 @@ if Choix_act = 2 then
       if Verif = True then
 
          --modif planning adherent semaine 1
+        
         If Choixsem = 1 Then 
-         if Choix_act = 1 then
+           if Choix_act = 1 then
             Tmp.Adherent.Planingsemaine1(Cj)(Ch).Activite := Aqua ;
             Tmp.Adherent.Planingsemaine1(Cj)(Ch).Present:= True;
             Tmp.Adherent.Nbseances:=Tmp.Adherent.Nbseances+1;
@@ -134,7 +135,9 @@ end Edit_Planning;
 
 
    procedure Choix_Acti_Open (
-         Cren     :        T_Creneau_Gen;
+      Cren     :        T_Creneau_Gen;
+      
+      
       Choixact : in out Integer;
         Choix_Adh:in integer;
         tete       : in out       Gestion_Pile.T_Pteurpileadherents)is
@@ -187,8 +190,10 @@ loop
             Put_line("Ce choix ne respecte pas votre contrat, veillez ressayer");NEW_line;
          Elsif Tmp2.Adherent.Typecontrat=Aqua and Choixact = 2 then 
             Put_line("Ce choix ne respecte pas votre contrat, veillez ressayer");new_line;
-         else exit;
-         end if;
+        else
+            
+             exit;
+        end if;
 
          
 end loop;
@@ -211,8 +216,14 @@ end loop;
 
 procedure Choix_Jour(P:in out Declaration_Adherent.T_Planning_General;Choix_Sem:integer;ChoixAdh:integer; Tete : in out Gestion_Pile.T_Pteurpileadherents
       )is
-         J,Choixjour,Choixhoraire,Choixact:integer:=0;
+   J,Choixjour,Choixhoraire,Choixact:Integer:=0;
+   Tmp3       : Gestion_Pile.T_Pteurpileadherents := tete;
+
 begin
+for I in 1..ChoixAdh-1 loop
+         Tmp3:= Tmp3.Suiv;
+      end loop;
+
 
 
  --Choix d'un jour
@@ -239,6 +250,11 @@ begin
 
                Get(Choixjour);
                Skip_Line;
+                     
+                     
+                     
+        loop           
+                     
                               --Choix d'un horaire et activite
                case Choixjour is
                   when 1..6=>
@@ -268,6 +284,10 @@ begin
                         New_Line;
                         Get(Choixhoraire);
                         Skip_Line;
+
+            if ((Choix_Sem =1 and Tmp3.Adherent.Planingsemaine1(Choixjour)(Choixhoraire).Present = False) or
+                (Choix_Sem =2 and Tmp3.Adherent.Planingsemaine2(Choixjour)(Choixhoraire).Present = False))Then 
+
 
                         case Choixhoraire is
                            when 1=>
@@ -303,11 +323,13 @@ begin
                            when others =>
                               null;
                         end case;
+               exit; 
+               else put("vous avez deja reserve a ce creneau, veillez en choisir un autre");
+               end if; 
 
-
-when others => null;
+               when others => null;
       end case;
-      
+      end loop;
 
 
 

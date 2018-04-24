@@ -1,7 +1,7 @@
-with Ada.Text_Io,Ada.Integer_Text_Io,dates,gestion_pile,
-declaration_adherent,menu_principal,abr_adher,donnee;
-use Ada.Text_Io,Ada.Integer_Text_Io,dates,gestion_pile,
-declaration_adherent,menu_principal,abr_adher,donnee;
+with Ada.Text_Io,Ada.Integer_Text_Io,dates,gestion_pile,affichage,
+declaration_adherent,menu_principal,abr_adher,donnee,action_adherent;
+use Ada.Text_Io,Ada.Integer_Text_Io,dates,gestion_pile,affichage,
+declaration_adherent,menu_principal,abr_adher,donnee,action_adherent;
 
 
 procedure Main is 
@@ -13,7 +13,7 @@ procedure Main is
 	nomadherent,prenomadherent : declaration_adherent.mot;
 	trouve : boolean;
 	informations_init_adherents : declaration_adherent.T_Tabadherents(0..9);
-
+       P1,P2:T_Planning_general;
 begin
 	donnee.initialisation_donnees(informations_init_adherents);
 	Ajout_Dans_Pile(informations_init_adherents,PteurPileA);
@@ -59,7 +59,8 @@ begin
           	when '1'=>
            		Put_Line("*** Reservation des creneaux ***");
 				New_Line;
-							-- procedure réservation des créneaux
+				   Reservation_Creneau(PteurPileA,P1,P2);
+
 				Retour_Menu_Principal;
 				exit;
 			when '2'=>
@@ -69,12 +70,21 @@ begin
 				Retour_Menu_Principal;
             	exit;
             when '3'=>
-            	Put_Line("*** Affichage des adherents d'un creneau ***");
+            	Put_Line("*** Affichage planning general ***");
             	New_Line;
-              	-- procedure affichage des adherents d'un créneau
+              	-- procedure affichage general
+                 affichage_global(P1,P2);            
+				Retour_Menu_Principal;
+                     exit;
+            when '4'=>
+            	Put_Line("*** Affichage planning d'un adherent ***");
+            	New_Line;
+              	-- procedure affichage general
+                 affichage_plan_adh(PteurPileA);            
 				Retour_Menu_Principal;
             	exit;
-            when '4'=>
+
+            when '5'=>
             	Put_Line("*** Mise a jour de la date ***");
             	New_Line;
             	Passer_Jour_Suivant(date_jour);
@@ -82,7 +92,7 @@ begin
             	affichage_date(date_jour);
             	Retour_Menu_Principal;
             	exit;
-            when '5'=>
+            when '6'=>
             	exit;
             when others =>
             	Put_Line("Choix inconnu, recommencer");

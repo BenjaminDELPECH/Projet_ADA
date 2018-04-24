@@ -110,6 +110,7 @@ procedure affichage_plan_adh (tete : in out Gestion_Pile.T_Pteurpileadherents)is
             tmp:=tmp.suiv;
          end loop;
 
+      new_line;Put("**Semaine actuelle**");new_line;
       for J in T_semaine'range loop
             if T_Semaine(J) = Dimanche then exit;end if;
             Put(T_Semaine'image(J));new_line;
@@ -121,15 +122,31 @@ procedure affichage_plan_adh (tete : in out Gestion_Pile.T_Pteurpileadherents)is
                end if;
               
                             
-              
-              
+              end loop;
+     new_line;new_line;
+         end loop;
+         
+            new_line;Put("**Semaine suivante**");new_line;
+      for J in T_semaine'range loop
+            if T_Semaine(J) = Dimanche then exit;end if;
+            Put(T_Semaine'image(J));new_line;
+        For K in  Tmp.Adherent.Planingsemaine2(T_Semaine'Pos(J)+1)'range LOOP
+              Put(K);Put("=>");
+               if Tmp.Adherent.Planingsemaine2(T_Semaine'Pos(J)+1)(K).Present = True then   
+                 Put(T_Activite'Image(Tmp.Adherent.Planingsemaine2(T_Semaine'Pos(J)+1)(K).Activite));
                
-                 
-                    
-      end loop;
+               end if;
+              
+                            
+              end loop;
      new_line;new_line;
      end loop;
 
+
+      
+      
+      
+      
       end if;
 
         

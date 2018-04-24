@@ -12,7 +12,7 @@ type T_Activite is (Aqua, Fitness);
  
   Type T_Creneau_Adh is record 
     Activite:T_Activite; --Aqua, Fitness, AquaEtFitness;
-    Present:Boolean;
+    Present:Boolean:=False;
    end record;
 
 Type T_Jour_adh is array(integer range 1..6) of T_Creneau_adh;
