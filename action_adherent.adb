@@ -3,6 +3,11 @@ use Ada.Text_Io;
 
 package body Action_Adherent is
 
+
+
+
+
+
    procedure Supprimmer_Adherent(Tete: in out Gestion_Pile.T_Pteurpileadherents;P1:in out T_planning_general;P2:in out T_planning_general)is
      Etape_Suiv:boolean;
       Tmp7,Tete2: Gestion_Pile.T_Pteurpileadherents := Tete;
@@ -11,6 +16,7 @@ package body Action_Adherent is
       Choixadh,Choixjour,Choixhoraire,Choixannuler:Integer;
       P:T_Planning_General:=P2;activite:T_activite;
 Arbre_de_vie:abr_adher.T_Arbre_adh;
+adherent_vide:T_Adherent;
 
 begin
 
@@ -55,8 +61,11 @@ if tete /= null then
        for I in 1..Choixadh-2 loop
           --on arrive à ladherent precedent
           Tmp7:=Tmp7.Suiv;
+          --tmp7.suiv et la celulle qu'on veut supprimmer
+          
           --on passe le pointeur à ladhereur après celui quon veut supprimmer
           tmp7.suiv:=Tmp7.suiv.suiv;
+       
        end loop;
        Put("Adherent supprimmer");
 
