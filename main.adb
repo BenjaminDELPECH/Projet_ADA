@@ -29,9 +29,11 @@ begin
 							Put_Line("*** Ajouter un adherent***");
 							ajout_adherent(PteurPileA);
 							insert_ABR(PteurPileA,Arbre);
+							Retour_Menu_Principal;
 							exit;
 						when '2'=>
 							Put_Line("*** Chercher un adherent***");
+							Affichage_Pile(PteurPileA);
 							gestion_pile.saisie_nom_prenom
 							(nomadherent,prenomadherent);
 							gestion_pile.Affichage_info_adh_pile 
@@ -57,7 +59,7 @@ begin
         	menu_principal.affichage_partie_reservation(choix1);
           case choix1 is
           	when '1'=>
-           		Put_Line("*** Reservation des creneaux ***");
+           		Put_Line("*** Réservation des creneaux ***");
 				New_Line;
 				   Reservation_Creneau(PteurPileA,P1,P2);
 
@@ -90,6 +92,7 @@ begin
             	Passer_Jour_Suivant(date_jour);
             	put ("Date passée au jour suivant, il est maintenant le : ");
             	affichage_date(date_jour);
+            	new_line;
             	Retour_Menu_Principal;
             	exit;
             when '6'=>

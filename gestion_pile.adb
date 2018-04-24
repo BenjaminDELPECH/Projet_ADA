@@ -189,8 +189,11 @@ end Affichage_info_adh_pile;
 
 Procedure Affichage_Pile (Pteur : T_PteurPileAdherents) is
 begin
-	if pteur /= null then 
+	if pteur /= null then
+		put ("=> ");
+		put(Pteur.adherent.prenom);
 		put(Pteur.adherent.nom);
+		new_line;
 		Affichage_Pile(pteur.suiv);
 	end if;
 end Affichage_Pile;

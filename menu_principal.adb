@@ -79,8 +79,8 @@ begin
    Put_Line("   1 : Reserver un creneau pour un adherent");
    Put_Line("   2 : Annuler un creneau d'un adherent");
    Put_Line("   3 : Afficher planning general");
-   Put_Line("   4 : Afficher planning dun adherent");
-   Put_Line("   5 : Mettre a jour la date");
+   Put_Line("   4 : Afficher planning d'un adherent");
+   Put_Line("   5 : Mettre à jour la date");
    Put_Line("   6 : QUITTER");
    New_Line;
    char:=saisie_choix;
