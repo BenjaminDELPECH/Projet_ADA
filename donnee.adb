@@ -72,7 +72,7 @@ package body donnee is
       Tab(6).Planingsemaine1(1)(4).Present:= True ;       
       Tab(6).Planingsemaine1(1)(4).Activite:= Declaration_Adherent.T_Activite'Val(1); 
 
-      Tab(7).Nom := "Vandim              ";
+      Tab(7).Nom := "Vadim               ";
       Tab(7).Prenom := "Marc                ";
       Tab(7).Datenaissance := (11,11,1982);
       Tab(7).DateDerniereAdhesion := (12,9,2017);
