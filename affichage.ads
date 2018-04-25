@@ -10,5 +10,5 @@ package Affichage is
   Arbre_de_vie:abr_adher.T_Arbre_adh);
  procedure Affichage_Global(P1:in out T_Planning_General;P2:in out T_Planning_General);
  -- procedure Affichage_Semaine_adh (P:in out T_Planning_Adh);
-
+procedure affichage_plan_adh_bis(infos : declaration_adherent.T_Adherent ; Pteur : Gestion_Pile.T_Pteurpileadherents);
 end Affichage;

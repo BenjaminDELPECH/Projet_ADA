@@ -16,7 +16,7 @@ Procedure deja_inscrit (infos : declaration_adherent.T_Adherent ;
 	Pteur : T_PteurPileAdherents ; inscrit : out boolean ; meme_contrat : out boolean);
 Procedure modification_contrat (infos : declaration_adherent.T_Adherent ; 
 	Pteur : in out T_PteurPileAdherents);
-Procedure ajout_adherent (Pteur : in out T_PteurPileAdherents);
+Procedure ajout_adherent (Pteur : in out T_PteurPileAdherents;infoAdherent : out declaration_adherent.T_adherent);
 Procedure Affichage_info_adh_pile (Pteur : T_PteurPileAdherents ; 
 	nomAdh, prenomAdh : declaration_adherent.mot; trouve : out boolean);
 Procedure saisie_nom_prenom (nomAdh,prenomAdh: out declaration_adherent.mot);

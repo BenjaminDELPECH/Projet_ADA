@@ -14,6 +14,7 @@ procedure Main is
 	informations_init_adherents : declaration_adherent.T_Tabadherents(0..9);
        P1,P2:T_Planning_general;
   Jour_actuel:jour_suiv.T_Semaine:=Mercredi;
+  infos_adherents : declaration_adherent.T_Adherent;
 begin
 	donnee.initialisation_donnees(informations_init_adherents,P1,P2);
 	Ajout_Dans_Pile(informations_init_adherents,PteurPileA);
@@ -27,8 +28,12 @@ begin
 					case choix1 is
 						when '1'=>
 							Put_Line("*** Ajouter un adherent***");
-							ajout_adherent(PteurPileA);
+							ajout_adherent(PteurPileA,infos_adherents);
 							insert_ABR(PteurPileA,Arbre);
+              new_line;
+              new_line;
+              put("Planning de l'adherent : ");
+              affichage.affichage_plan_adh_bis(infos_adherents,PteurPileA);
 							Retour_Menu_Principal;
 							exit;
 						when '2'=>
@@ -39,6 +44,8 @@ begin
 							gestion_pile.Affichage_info_adh_pile 
 							(PteurPileA,nomadherent,prenomadherent,trouve);
 							-- procedure adherent_archive
+              if not trouve then new_line;put("Adherent non trouve");
+              end if;
 							new_line;
 							Retour_Menu_Principal;
 							exit;
@@ -59,7 +66,7 @@ begin
         	menu_principal.affichage_partie_reservation(choix1);
           case choix1 is
           	when '1'=>
-           		Put_Line("*** Réservation des creneaux ***");
+           		Put_Line("*** Reservation des creneaux ***");
 				New_Line;
 				   Reservation_Creneau(PteurPileA,P1,P2);
 
@@ -91,7 +98,7 @@ begin
             	Put_Line("*** Mise a jour de la date ***");
             	New_Line;
             	jour_suiv.Passer_Jour_Suivant(date_jour,Jour_actuel);
-            	put ("Date passée au jour suivant, il est maintenant le : ");
+            	put ("Date passee au jour suivant, il est maintenant le : ");
             	affichage_date(date_jour);
             	new_line;
               Renouvellement_Adherent(Arbre,date_jour,PteurPileA);

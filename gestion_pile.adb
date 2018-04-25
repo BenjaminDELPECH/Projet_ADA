@@ -87,11 +87,10 @@ begin
 end modification_contrat;
 
 
-Procedure ajout_adherent (Pteur : in out T_PteurPileAdherents) is
+Procedure ajout_adherent (Pteur : in out T_PteurPileAdherents ; InfoAdherent : out declaration_adherent.T_adherent) is
 	act : declaration_adherent.T_Contrat;
 	correct : boolean := false;
 	date_adherent : dates.T_Date;
-	InfoAdherent : declaration_adherent.T_Adherent;
 	present_pile,contrat_identique : boolean := false;
 	confirmation : character;
 begin
@@ -172,6 +171,9 @@ begin
 				put("Fitness");
 			else put("Aqua et Fitness");
 			end if;
+			new_line;
+			put("Nombre de séances : ");
+			put(Pteur.adherent.nbseances,width=>0);
 			new_line;
 			trouve:=true;
 		else Affichage_info_adh_pile(Pteur.suiv,nomAdh,prenomAdh,trouve);
