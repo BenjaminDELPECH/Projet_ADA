@@ -370,7 +370,7 @@ tmp2:Gestion_Pile.T_Pteurpileadherents:=tete;
       
 loop
       if(tmp2.Adherent.Typecontrat=Aquaetfitness and
-         Cren.Aqua.Open = False  and Cren.Fitness.Open = False and Cren.Aqua.Taille < N and Cren.Fitness.Taille < N) then
+         Cren.Aqua.Open = true  and Cren.Fitness.Open = true and Cren.Aqua.Taille < P and Cren.Fitness.Taille < N) then
          Put_Line("1 pour Reserver Aqua");
          Put_Line("2 pour Reserver Fitness");
          
