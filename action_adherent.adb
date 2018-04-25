@@ -394,7 +394,7 @@ loop
 
 
       elsif(tmp2.Adherent.Typecontrat=Aqua and 
-         Cren.Aqua.Open = False and 
+         Cren.Aqua.Open = true and 
          Cren.Aqua.Tabinscrit(N).Datenaissance.Annee=1 
          and Cren.Aqua.Taille < N)then
          Put_Line("1 pour Reserver Aqua");
@@ -419,7 +419,7 @@ loop
          exit when choixact=3;
 
       elsif(tmp2.Adherent.Typecontrat=Fitness and
-         Cren.Fitness.Open = False and Cren.Fitness.Tabinscrit(N).Datenaissance.Annee=1 and Cren.Fitness.Taille < N) then
+         Cren.Fitness.Open = true and Cren.Fitness.Tabinscrit(N).Datenaissance.Annee=1 and Cren.Fitness.Taille < N) then
          Put_line("2 pour Reserver Fitness");
          put_line("3 pour retourner au menu");
         
@@ -443,7 +443,7 @@ loop
          exit when Choixact=3;
 
       else
-         Put("Pas de creneau disponible a cet horaire");
+         Put("Creneau non disponible");
       end if;
       
 
