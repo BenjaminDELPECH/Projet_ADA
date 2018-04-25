@@ -535,7 +535,7 @@ for I in 1..ChoixAdh-1 loop
                      
                               --Choix d'un horaire et activite
                case Choixjour is
-                  when 1..6=>
+                  when 1..7=>
 
                     
                         New_Line;
@@ -558,14 +558,13 @@ for I in 1..ChoixAdh-1 loop
                         Put_Line("6=> 19H30-20H30");
                         New_Line;
                         
-                        
                         New_Line;
                      loop
                         begin
                            Get(Choixhoraire);
                            Skip_Line;
                            exit when Choixhoraire=1 or Choixhoraire=2 or Choixhoraire=3
-                           or Choixhoraire=4 or Choixhoraire=5 or Choixhoraire=6;
+                           or Choixhoraire=4 or Choixhoraire=5 or Choixhoraire=6 ;
                            new_line;
                            put("Selectionnez un chiffre valable pour le creneau"); new_line;
                            exception
@@ -591,15 +590,15 @@ for I in 1..ChoixAdh-1 loop
                               Choix_Acti_Open(P(Choixjour)(5),Choixact,ChoixAdh,tete);
                            when 6=>
                               Choix_Acti_Open(P(Choixjour)(6),Choixact,ChoixAdh,tete);
-                           
+                          
+
                            when others =>
                               Put("erreur, veillez ressayer");
                         end case;
-
+                     
                         --Modif planning gen, et modif plan utilisateur
 
-                        Put(Choixact);
-                        Put(Choixact);
+                        
                         case Choixact is
                            when 1=>
                                 Edit_Planning(
@@ -613,7 +612,8 @@ for I in 1..ChoixAdh-1 loop
                               null;
                         end case;
                exit; 
-               else put("vous avez deja reserve a ce creneau, veillez en choisir un autre");
+                     else Put("vous avez deja reserve a ce creneau, veillez en choisir un autre");exit;
+                     
                end if; 
 
                when others => null;

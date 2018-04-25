@@ -5,7 +5,87 @@ package body donnee is
 
    procedure Initialisation_donnees ( Tab: OUT declaration_adherent.T_Tabadherents;P1:IN OUT declaration_adherent.T_Planning_general;P2:in OUT declaration_adherent.T_Planning_general  ) is
      Begin 
-      tab(0).Nom:="Ermont              "; --others
+      
+        --creneaux ouverts
+        P1(1)(3).Fitness.Open := True;
+        P1(1)(4).Fitness.Open := True;
+        P1(1)(5).Fitness.Open := True;
+        
+        P1(2)(5).Fitness.Open := True;
+        P1(2)(6).Fitness.Open := True;
+                
+        P1(3)(3).Fitness.Open := True;
+        P1(3)(5).Fitness.Open := True;
+        P1(3)(6).Fitness.Open := True;
+        
+        P1(5)(3).Fitness.Open := True;
+                
+        P1(6)(1).Fitness.Open := True;
+        P1(6)(2).Fitness.Open := True;
+        
+        --Aqua
+        P1(1)(3).Aqua.Open := True;
+        P1(1)(5).Aqua.Open := True;
+        P1(1)(6).Aqua.Open := True;
+        
+        P1(2)(3).Aqua.Open := True;
+        P1(2)(5).Aqua.Open := True;
+        P1(2)(6).Aqua.Open := True;                
+        
+        P1(3)(5).Aqua.Open := True;
+        P1(3)(6).Aqua.Open := True;
+        
+        P1(5)(5).Aqua.Open := True;
+                
+        P1(6)(1).Aqua.Open := True;
+        P1(6)(2).Aqua.Open := True;
+        
+
+--creneaux ouverts
+        P2(1)(3).Fitness.Open := True;
+        P2(1)(4).Fitness.Open := True;
+        P2(1)(5).Fitness.Open := True;
+        
+        P2(2)(5).Fitness.Open := True;
+        P2(2)(6).Fitness.Open := True;
+                
+        P2(3)(3).Fitness.Open := True;
+        P2(3)(5).Fitness.Open := True;
+        P2(3)(6).Fitness.Open := True;
+        
+        P2(5)(3).Fitness.Open := True;
+                
+        P2(6)(1).Fitness.Open := True;
+        P2(6)(2).Fitness.Open := True;
+        
+        --Aqua
+        P2(1)(3).Aqua.Open := True;
+        P2(1)(5).Aqua.Open := True;
+        P2(1)(6).Aqua.Open := True;
+        
+        P2(2)(3).Aqua.Open := True;
+        P2(2)(5).Aqua.Open := True;
+        P2(2)(6).Aqua.Open := True;                
+        
+        P2(3)(5).Aqua.Open := True;
+        P2(3)(6).Aqua.Open := True;
+        
+        P2(5)(5).Aqua.Open := True;
+                
+        P2(6)(1).Aqua.Open := True;
+        P2(6)(2).Aqua.Open := True;
+
+       
+
+
+
+
+
+
+
+
+
+tab(0).Nom:="Ermont              "; --others
       Tab(0).Prenom := "Luc                 ";
       Tab(0).Datenaissance := (22,5,1987);
       Tab(0).DateDerniereAdhesion := (27,4,2017);

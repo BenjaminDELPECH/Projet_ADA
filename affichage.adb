@@ -16,11 +16,13 @@ begin
         for J in P(1..6)'range loop
          Put(J);Put("=>");
          Put("Aqua=>");
-        for K in P(T_Semaine'Pos(I)+1)(J).Aqua.Tabinscrit'range loop
+         if P(T_Semaine'Pos(I)+1)(J).Aqua.Open = False Then put("Close");end if;
+         for K in P(T_Semaine'Pos(I)+1)(J).Aqua.Tabinscrit'range loop
          Put(P(T_Semaine'Pos(I)+1)(J).Aqua.Tabinscrit(K).Nom);
          end loop;
          
          Put("Fitness=>");
+         if P(T_Semaine'Pos(I)+1)(J).Fitness.Open = False Then put("Close");end if;
          for L in P(T_Semaine'Pos(I)+1)(J).Fitness.Tabinscrit'range loop
          Put(P(T_Semaine'Pos(I)+1)(J).Fitness.Tabinscrit(L).Nom);
 
