@@ -6,7 +6,7 @@ package Sem_J_Cren is
    --Creneaux generaux pour le planing general
    
     Type T_Creneau_Aqua_gen is record
-      Tabinscrit:T_Tabadherents(1..N);
+      Tabinscrit:T_Tabadherents(1..P);
       Taille:Integer:=0;
       Open:Boolean;
    end record;
