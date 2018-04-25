@@ -1,3 +1,6 @@
+with ada.text_io,ada.integer_text_io,dates;
+use ada.text_io,ada.integer_text_io,dates;
+
 package body Affichage is
 
 
@@ -155,5 +158,46 @@ procedure affichage_plan_adh (tete : in out Gestion_Pile.T_Pteurpileadherents;
       end if;
 
    end Affichage_plan_adh;
+
+   procedure affichage_plan_adh_bis (infos : declaration_adherent.T_Adherent ; Pteur : Gestion_Pile.T_Pteurpileadherents) is
+   begin
+    if Pteur /= null then
+      if infos.nom=Pteur.Adherent.nom and then infos.prenom=Pteur.adherent.prenom and then
+      infos.datenaissance=Pteur.adherent.datenaissance then
+
+      for J in T_semaine'range loop
+            if T_Semaine(J) = Dimanche then exit;end if;
+            Put(T_Semaine'image(J));new_line;
+        For K in  Pteur.Adherent.Planingsemaine1(T_Semaine'Pos(J)+1)'range LOOP
+              Put(K);Put(":");
+               if Pteur.Adherent.Planingsemaine1(T_Semaine'Pos(J)+1)(K).Present = True then   
+                 Put(T_Activite'Image(Pteur.Adherent.Planingsemaine1(T_Semaine'Pos(J)+1)(K).Activite));
+               
+               else Put("      ");
+               end if;
+              
+                            
+              end loop;
+     new_line;new_line;
+         end loop;
+         
+            new_line;Put("**Semaine suivante**");new_line;
+      for J in T_semaine'range loop
+            if T_Semaine(J) = Dimanche then exit;end if;
+            Put(T_Semaine'image(J));new_line;
+        For K in  Pteur.Adherent.Planingsemaine2(T_Semaine'Pos(J)+1)'range LOOP
+              Put(K);Put(":");
+               if Pteur.Adherent.Planingsemaine2(T_Semaine'Pos(J)+1)(K).Present = True then   
+                 Put(T_Activite'Image(Pteur.Adherent.Planingsemaine2(T_Semaine'Pos(J)+1)(K).Activite));
+               else Put("      ");
+               end if;            
+              end loop;
+     new_line;new_line;
+     end loop;
+     else affichage_plan_adh_bis(infos,Pteur.suiv);
+     end if;
+    end if;        
+
+end affichage_plan_adh_bis;
 
 end Affichage;

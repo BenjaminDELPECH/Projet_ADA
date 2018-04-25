@@ -118,7 +118,7 @@ end Supprimmer_creneau;
             tmp4:=Tmp4.suiv;
             New_Line;
          end loop;
-         put("Saisir le numéro de l'adhérent : ");
+         put("Saisir le numero de l'adherent : ");
          loop
              begin
                  Get(Choixadh);
@@ -160,7 +160,7 @@ end Supprimmer_creneau;
                New_Line;
                New_Line;
               
-               put("Saisir le numéro du jour : ");
+               put("Saisir le numero du jour : ");
                loop
                   begin
                   Get(Choixjour);
@@ -168,7 +168,7 @@ end Supprimmer_creneau;
                   exit when choixjour=1 or choixjour=2 or choixjour=3
                   or choixjour=4 or choixjour=5 or Choixjour=6;
                   new_line;
-                  put("Veuillez sélectionner le numéro d'un jour valide ");
+                  put("Veuillez selectionner le numero d'un jour valide ");
                   new_line;
                   exception
                      when data_error=>skip_line;
@@ -208,7 +208,7 @@ end Supprimmer_creneau;
                            exit when Choixhoraire=1 or Choixhoraire=2 or Choixhoraire=3
                            or Choixhoraire=4 or Choixhoraire=5 or Choixhoraire=6;
                            new_line;
-                           put("Sélectionnez un chiffre valable pour le créneau"); new_line;
+                           put("Selectionnez un chiffre valable pour le creneau"); new_line;
                            exception
                               when data_error=>skip_line;put("Erreur, veuillez recommencer la saisie "); new_line;
                               when constraint_error=>skip_line;put("Erreur, veuillez recommencer la saisie "); new_line;
@@ -216,7 +216,7 @@ end Supprimmer_creneau;
                      end loop;
 
                      if Tmp5.Adherent.Planingsemaine2(ChoixJour)(Choixhoraire).Present = True then new_line;
-                     Put_line("Vous avez une reservation à ce creneau, SOUHAITEZ VOUS ANNULER?");
+                     Put_line("Vous avez une reservation a ce creneau, SOUHAITEZ VOUS ANNULER?");
                         new_line;
                         Put_line("1=>OUI");
                         Put_line("2=>NON");
@@ -382,7 +382,7 @@ loop
                Skip_Line;
                exit when choixact=1 or choixact=2;
                new_line;
-               put("Saisissez un chiffre proposé "); 
+               put("Saisissez un chiffre propose "); 
                new_line;
                exception
                      when data_error=>skip_line;
@@ -407,7 +407,7 @@ loop
          Get(Choixact);skip_line;
          exit when choixact=1 or choixact=3;
          new_line;
-         put("Saisir un chiffre proposé");
+         put("Saisir un chiffre propose");
          new_line;
             exception
                      when data_error=>skip_line;
@@ -430,7 +430,7 @@ loop
          Get(Choixact);skip_line;
          exit when choixact=2 or choixact=3;
          new_line;
-         put("Saisir un chiffre proposé");
+         put("Saisir un chiffre propose");
          new_line;
             exception
                      when data_error=>skip_line;
@@ -443,7 +443,7 @@ loop
          exit when Choixact=3;
 
       else
-         Put("Pas de creneau disponible à cet horaire");
+         Put("Pas de creneau disponible a cet horaire");
       end if;
       
 
@@ -509,7 +509,7 @@ for I in 1..ChoixAdh-1 loop
                New_Line;
                New_Line;
               
-               put("Saisir le numéro du jour : ");
+               put("Saisir le numero du jour : ");
                loop
                   begin
                   Get(Choixjour);
@@ -517,7 +517,7 @@ for I in 1..ChoixAdh-1 loop
                   exit when choixjour=1 or choixjour=2 or choixjour=3
                   or choixjour=4 or choixjour=5 or Choixjour=6;
                   new_line;
-                  put("Veuillez sélectionner le numéro d'un jour valide ");
+                  put("Veuillez selectionner le numero d'un jour valide ");
                   new_line;
                   exception
                      when data_error=>skip_line;
@@ -567,7 +567,7 @@ for I in 1..ChoixAdh-1 loop
                            exit when Choixhoraire=1 or Choixhoraire=2 or Choixhoraire=3
                            or Choixhoraire=4 or Choixhoraire=5 or Choixhoraire=6;
                            new_line;
-                           put("Sélectionnez un chiffre valable pour le créneau"); new_line;
+                           put("Selectionnez un chiffre valable pour le creneau"); new_line;
                            exception
                               when data_error=>skip_line;put("Erreur, veuillez recommencer la saisie "); new_line;
                               when constraint_error=>skip_line;put("Erreur, veuillez recommencer la saisie "); new_line;
@@ -660,7 +660,7 @@ end Choix_Jour;
          end loop;
 
          new_line;
-         put ("Entrer le numéro de l'adhérent : ");
+         put ("Entrer le numero de l'adherent : ");
          loop
             begin
                Get(Choixadh);
@@ -700,7 +700,7 @@ end Choix_Jour;
          Get(Choix_Sem);skip_line;
          exit when choix_sem=1 or choix_sem=2 or choix_sem=3;
          new_line;
-         put("Saisir un chiffre proposé");
+         put("Saisir un chiffre propose");
          new_line;
             exception
                      when data_error=>skip_line;
