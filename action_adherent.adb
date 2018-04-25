@@ -86,7 +86,20 @@ procedure Supprimmer_creneau (
              tmp6.adherent.planingSemaine2(Cj)(Ch).Present := False;
        end if;         
     end loop;
+    end if;
+    If activite = Fitness then
+    For i in  P(Cj)(Ch).Fitness.Tabinscrit'range loop
+       if P(Cj)(Ch).Fitness.Tabinscrit(I).Nom = tmp6.Adherent.Nom
+                  and P(Cj)(Ch).Fitness.Tabinscrit(I).Prenom = tmp6.Adherent.Prenom 
+                  and  P(Cj)(Ch).Fitness.Tabinscrit(I).Datenaissance.Annee = tmp6.Adherent.Datenaissance.Annee
+                and  P(Cj)(Ch).Fitness.Tabinscrit(I).Datenaissance.Mois = Tmp6.Adherent.Datenaissance.Mois then
+             P(Cj)(Ch).Fitness.Tabinscrit(I) := Adherent_Vide;
+             P(Cj)(Ch).Aqua.Taille :=P(Cj)(Ch).Aqua.Taille-1;
+             tmp6.adherent.planingSemaine2(Cj)(Ch).Present := False;
+       end if;         
+    end loop;
  end if;
+
 
 end Supprimmer_creneau;
 
